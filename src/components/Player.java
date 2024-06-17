@@ -4,6 +4,7 @@ import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Player extends Entity {
@@ -14,8 +15,28 @@ public class Player extends Entity {
         explosion_start, explosion_end, next_shot, radius);
     }
 
-    public double getYPosition(){
+    public double getPosY(){
         return position.getPosY();
+    }
+
+    public double getPosX(){
+        return position.getPosX();
+    }
+
+    public double getRadius(){
+        return this.radius;
+    }
+
+    public States getState(){
+        return this.state;
+    }
+
+    public double getExplosionStart(){
+        return this.explosion_start;
+    }
+
+    public double getExplosionEnd(){
+        return this.explosion_end;
     }
 
     public double getNextShoot(){
@@ -40,5 +61,23 @@ public class Player extends Entity {
                 this.position.getPosY() - 2 * this.radius, 0, -1);
         projectiles.add(projectile);
         return projectiles;
+    }
+
+    public void kill(long currentTime){
+        this.state = States.EXPLODING;
+        this.explosion_start = currentTime;
+        this.explosion_end = currentTime + 2000;
+    }
+
+    public void draw(double currentTime){
+        if(this.getState() == States.EXPLODING){
+            double alpha = (currentTime - this.getExplosionStart())
+                    / (this.getExplosionEnd() - this.getExplosionStart());
+            GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
+        }
+        else{
+            GameLib.setColor(Color.BLUE);
+            GameLib.drawPlayer(this.getPosX(), this.getPosY(), this.getRadius());
+        }
     }
 }

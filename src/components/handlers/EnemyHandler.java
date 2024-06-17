@@ -3,15 +3,16 @@ package components.handlers;
 import components.enemies.Circle;
 import components.enemies.IEnemy;
 import components.enemies.Square;
+import mainpackage.States;
 
 import java.util.LinkedList;
 
 public class EnemyHandler {
     protected LinkedList<IEnemy> enemies = new LinkedList<>();
 
-    public void CheckEnemies(long currentTime){
+    public void UpdateEnemies(long currentTime){
         for(IEnemy e : this.enemies){
-            if(e.isExploding(currentTime) || e.leaveScreen()){
+            if(e.exploded(currentTime) || e.leaveScreen()){
                 enemies.remove(e);
             }
         }
@@ -25,4 +26,12 @@ public class EnemyHandler {
             this.enemies.add(Square.CreateSquare(currentTime));
         }
     }
+
+//    public void RemoveEnemies(){
+//        for(IEnemy enemy : this.enemies){
+//            if(enemy.getState() == States.INACTIVE){
+//                enemies.remove(enemy);
+//            }
+//        }
+//    }
 }

@@ -4,6 +4,7 @@ import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Circle extends Entity implements IEnemy{
@@ -33,7 +34,7 @@ public class Circle extends Entity implements IEnemy{
         this.angle += this.angleSpeed * delta;
     }
 
-    public Boolean isExploding(long currentTime) {
+    public Boolean exploded(long currentTime) {
         return this.state == States.EXPLODING && currentTime > this.explosion_end;
     }
 
@@ -60,5 +61,34 @@ public class Circle extends Entity implements IEnemy{
     }
     public double getPosY(){
         return this.position.getPosY();
+    }
+    public double getPosX(){
+        return this.position.getPosX();
+    }
+    public double getRadius(){
+        return this.radius;
+    }
+    public States getState(){
+        return this.state;
+    }
+    public double getExplosionEnd(){
+        return this.explosion_end;
+    }
+    public void kill(long currenTime){
+        this.state = States.EXPLODING;
+        this.explosion_start = currenTime;
+        this.explosion_end = currenTime + 500;
+    }
+
+    public void drawEnemy(double currentTime){
+        if(this.state == States.EXPLODING){
+            double alpha = (currentTime - this.explosion_start)
+                    / (this.explosion_end - this.explosion_start);
+            GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
+        }
+        else{
+            GameLib.setColor(Color.CYAN);
+            GameLib.drawCircle(this.getPosX(), this.getPosY(), this.getRadius());
+        }
     }
 }

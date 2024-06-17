@@ -1,7 +1,6 @@
 package entity;
 
 import components.Position;
-import components.ProjectileList;
 import mainpackage.States;
 
 public class Entity {

@@ -15,8 +15,12 @@ public class Projectile {
     public double getRadius(){
         return this.radius;
     }
-    public Position getPosition(){
-        return this.position;
+    public double getPosX(){
+        return this.position.getPosX();
+    }
+
+    public double getPosY(){
+        return this.position.getPosY();
     }
 
     public void andar(double delta){

@@ -4,6 +4,7 @@ import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Square extends Entity implements IEnemy{
@@ -36,7 +37,6 @@ public class Square extends Entity implements IEnemy{
         squareCounter = 0;
         nextSquare = (long) (currentTime + 3000 + Math.random() * 3000);
         return new Square(currentTime, Math.random() > 0.5 ? GameLib.WIDTH * 0.2 : GameLib.WIDTH * 0.8);
-
     }
 
 
@@ -46,7 +46,7 @@ public class Square extends Entity implements IEnemy{
         this.angle += this.angleSpeed * delta;
     }
 
-    public Boolean isExploding(long currentTime) {
+    public Boolean exploded(long currentTime) {
         return this.state == States.EXPLODING && currentTime > this.explosion_end;
     }
 
@@ -87,5 +87,29 @@ public class Square extends Entity implements IEnemy{
 
     public double getPosY(){
         return this.position.getPosY();
+    }
+    public double getPosX(){ return this.position.getPosX(); }
+    public double getRadius(){ return this.radius; }
+    public States getState(){
+        return this.state;
+    }
+    public double getExplosionEnd(){
+        return this.explosion_end;
+    }
+    public void kill(long currenTime){
+        this.state = States.EXPLODING;
+        this.explosion_start = currenTime;
+        this.explosion_end = currenTime + 500;
+    }
+    public void drawEnemy(double currentTime){
+        if(this.state == States.EXPLODING){
+            double alpha = (currentTime - this.explosion_start)
+                    / (this.explosion_end - this.explosion_start);
+            GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
+        }
+        else{
+            GameLib.setColor(Color.MAGENTA);
+            GameLib.drawDiamond(this.getPosX(), this.getPosY(), this.getRadius());
+        }
     }
 }

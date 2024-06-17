@@ -2,6 +2,9 @@ package components.handlers;
 
 import components.Player;
 import components.Projectile;
+import components.enemies.IEnemy;
+
+import java.util.LinkedList;
 
 public class CollisionHandler {
     private Player player;
@@ -13,5 +16,56 @@ public class CollisionHandler {
         this.player = player;
         this.enemyHandler = enemyHandler;
         this.projetileHandler = projectileHandler;
+    }
+
+    /*
+    Testar colisões:
+    PLAYER -> tiro inimigo
+    INIMIGO -> tiro player
+    PLAYER -> INIMIGO
+    */
+
+    public void checarColisoes(long currentTime){
+        enemyProjectilePlayer(currentTime);
+        playerEnemy(currentTime);
+        playerProjectileEnemy(currentTime);
+    }
+
+    private void enemyProjectilePlayer(long currentTime) {
+        for(Projectile proj : this.projetileHandler.enemyProjectileList){
+            double dx = proj.getPosX() - this.player.getPosX();
+            double dy = proj.getPosY() - this.player.getPosY();
+            double dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < (this.player.getRadius() + proj.getRadius()) * 0.8){
+                this.player.kill(currentTime);
+            }
+        }
+    }
+
+    private void playerEnemy(long currentTime) {
+        for(IEnemy enemy : enemyHandler.enemies){
+           double dx = enemy.getPosX() - this.player.getPosX();
+           double dy = enemy.getPosY() - this.player.getPosY();
+           double dist = Math.sqrt(dx * dx + dy * dy);
+
+           if(dist < (player.getRadius() + enemy.getRadius()) * 0.8){
+               this.player.kill(currentTime);
+           }
+        }
+    }
+
+    private void playerProjectileEnemy(long currentTime) {
+        for(Projectile proj : projetileHandler.playerProjectileList){
+            for(IEnemy enemy : enemyHandler.enemies){
+                double dx = enemy.getPosX() - proj.getPosX();
+                double dy = enemy.getPosY() - proj.getPosY();
+                double dist = Math.sqrt(dx * dx + dy * dy);
+
+                if(dist < (player.getRadius() + enemy.getRadius()) * 0.8){
+                    enemy.kill(currentTime);
+                }
+            }
+        }
     }
 }
