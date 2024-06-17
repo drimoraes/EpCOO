@@ -49,7 +49,7 @@ public class Circle extends Entity implements IEnemy{
         double projY = this.position.getPosY();
         double projSpeedX = Math.cos(this.angle) * 0.45;
         double projSpeedY = Math.sin(this.angle) * 0.45 * (-1.0);
-        this.next_shot = (long) (currentTime + 200 +Math.random() * 500);
+        this.next_shot = (long) (currentTime + 200 + Math.random() * 500);
 
         Projectile proj = new Projectile(this.projetileRadius, projX, projY, projSpeedX, projSpeedY);
         projectiles.add(proj);

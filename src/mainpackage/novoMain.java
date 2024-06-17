@@ -25,8 +25,9 @@ public class novoMain {
 		Player player = new Player(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90,
 				0.25,0.25, 0, 0,currentTime, 12);
 
-		EnemyHandler enemyHandler = new EnemyHandler();
-		ProjetileHandler projetileHandler = new ProjetileHandler(player, enemyHandler);
+
+		ProjetileHandler projetileHandler = new ProjetileHandler(player);
+		EnemyHandler enemyHandler = new EnemyHandler(projetileHandler);
 		CollisionHandler collisionHandler = new CollisionHandler(player, enemyHandler, projetileHandler);
 
 		DrawHandler drawHandler = new DrawHandler(player, enemyHandler, projetileHandler);
@@ -57,9 +58,9 @@ public class novoMain {
 
 			projetileHandler.CheckShoots(delta);
 
-			enemyHandler.Update(currentTime, delta);
+			enemyHandler.Update(currentTime, delta, player.getPosY());
 
-			projetileHandler.DispararInimigos(currentTime, delta);
+			//projetileHandler.DispararInimigos(currentTime, delta);
 
 			enemyHandler.Add(currentTime);
 

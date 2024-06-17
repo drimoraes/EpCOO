@@ -13,6 +13,7 @@ public class Square extends Entity implements IEnemy{
     private double projetileRadius;
     private static long nextSquare = 0;
     private static double squareCounter = 0;
+    private Boolean shootNow = false;
 
     public Square(long currentTime, double spawnX){
         super(States.ACTIVE, spawnX, -10.0,
@@ -42,6 +43,7 @@ public class Square extends Entity implements IEnemy{
 
 
     public void Andar(long delta) {
+        this.shootNow = false;
         double previousY = position.getPosY();
         position.walkX(position.getSpeedX() * Math.cos(this.angle) * delta);
         position.walkY(position.getSpeedY() * Math.sin(this.angle) * delta * (-1.0));
@@ -52,6 +54,16 @@ public class Square extends Entity implements IEnemy{
         if(previousY < threshold && getPosY() >= threshold) {
             if(this.getPosX() < GameLib.WIDTH / 2) this.angleSpeed = 0.003;
             else this.angleSpeed = -0.003;
+        }
+        if(this.angleSpeed > 0 && Math.abs(this.angle - 3 * Math.PI) < 0.05){
+            this.angleSpeed = 0.0;
+            this.angle = 3 * Math.PI;
+            this.shootNow = true;
+        }
+        if(this.angleSpeed< 0 && Math.abs(this.angle) < 0.05){
+            this.angleSpeed = 0.0;
+            this.angle = 0.0;
+            this.shootNow = true;
         }
     }
 
@@ -81,17 +93,7 @@ public class Square extends Entity implements IEnemy{
     }
 
     public Boolean getNextShoot(long currentTime){
-        if(this.angleSpeed > 0 && Math.abs(this.angle - 3 * Math.PI) < 0.05){
-            this.angleSpeed = 0.0;
-            this.angle = 3 * Math.PI;
-            return true;
-        }
-        if(this.angleSpeed < 0 && Math.abs(this.angle) < 0.05){
-            this.angleSpeed = 0.0;
-            this.angle = 0.0;
-            return true;
-        }
-        return false;
+        return shootNow;
     }
 
     public double getPosY(){
