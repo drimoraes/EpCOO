@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class Player extends Entity {
     private double projectile_radius = 2;
-    public Player(States state, double entityPosX, double entityPosY, double entitySpeedX, double entitySpeedY,
+    public Player(double entityPosX, double entityPosY, double entitySpeedX, double entitySpeedY,
                   double explosion_start, double explosion_end, long next_shot, double radius){
-        super(state, entityPosX, entityPosY, entitySpeedX, entitySpeedY,
+        super(States.ACTIVE, entityPosX, entityPosY, entitySpeedX, entitySpeedY,
         explosion_start, explosion_end, next_shot, radius);
     }
 
@@ -78,6 +78,14 @@ public class Player extends Entity {
         else{
             GameLib.setColor(Color.BLUE);
             GameLib.drawPlayer(this.getPosX(), this.getPosY(), this.getRadius());
+        }
+    }
+
+    public void checkRevive(long currentTime){
+        if(this.state == States.EXPLODING){
+            if(currentTime > this.explosion_end){
+                this.state = States.ACTIVE;
+            }
         }
     }
 }

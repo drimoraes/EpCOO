@@ -10,15 +10,18 @@ import java.util.LinkedList;
 public class EnemyHandler {
     protected LinkedList<IEnemy> enemies = new LinkedList<>();
 
-    public void UpdateEnemies(long currentTime){
+    public void Update(long currentTime, long delta){
         for(IEnemy e : this.enemies){
             if(e.exploded(currentTime) || e.leaveScreen()){
                 enemies.remove(e);
             }
+            else{
+                e.Andar(delta);
+            }
         }
     }
 
-    public void AddEnemies(long currentTime){
+    public void Add(long currentTime){
         if(currentTime > Circle.getNextEnemy()) {
             this.enemies.add(new Circle(currentTime));
         }

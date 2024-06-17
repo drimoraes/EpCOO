@@ -16,9 +16,12 @@ public class DrawHandler {
     private EnemyHandler enemyHandler;
     private ProjetileHandler projectiles;
 
-    public DrawHandler() {
+    public DrawHandler(Player player, EnemyHandler enemyHandler, ProjetileHandler projectiles) {
         this.proximo = new Background(20, 0.07, 0.0);
         this.distante = new Background(50, 0.45, 0.0);
+        this.player = player;
+        this.enemyHandler = enemyHandler;
+        this.projectiles = projectiles;
     }
 
     public void continueBackground(long delta){
@@ -33,7 +36,7 @@ public class DrawHandler {
         drawEnemies(currentTime);
     }
 
-    public void drawPlayerProjectiles(){
+    private void drawPlayerProjectiles(){
         for(Projectile proj : this.projectiles.playerProjectileList){
             GameLib.setColor(Color.GREEN);
             GameLib.drawLine(proj.getPosX(), proj.getPosY() - 5, proj.getPosX(), proj.getPosY() + 5);
@@ -42,14 +45,14 @@ public class DrawHandler {
         }
     }
 
-    public void drawEnemiesProjectiles(){
+    private void drawEnemiesProjectiles(){
         for(Projectile proj : this.projectiles.enemyProjectileList){
             GameLib.setColor(Color.RED);
             GameLib.drawCircle(proj.getPosX(), proj.getPosY(), proj.getRadius());
         }
     }
 
-    public void drawEnemies(double currentTime){
+    private void drawEnemies(double currentTime){
         for(IEnemy enemy : this.enemyHandler.enemies){
             enemy.drawEnemy(currentTime);
         }

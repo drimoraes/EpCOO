@@ -3,6 +3,7 @@ package components.handlers;
 import components.Player;
 import components.Projectile;
 import components.enemies.IEnemy;
+import mainpackage.States;
 
 import java.util.LinkedList;
 
@@ -25,9 +26,11 @@ public class CollisionHandler {
     PLAYER -> INIMIGO
     */
 
-    public void checarColisoes(long currentTime){
-        enemyProjectilePlayer(currentTime);
-        playerEnemy(currentTime);
+    public void checarColisoes(long currentTime, States playerState){
+        if(playerState == States.ACTIVE){
+            enemyProjectilePlayer(currentTime);
+            playerEnemy(currentTime);
+        }
         playerProjectileEnemy(currentTime);
     }
 

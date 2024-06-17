@@ -1,6 +1,8 @@
 package mainpackage;
 
 import components.Player;
+import components.handlers.EnemyHandler;
+import components.handlers.ProjetileHandler;
 
 import java.awt.Color;
 
@@ -71,11 +73,6 @@ public class Main {
 		long currentTime = System.currentTimeMillis();
 
 		/* variáveis do player */
-
-		/*
-		Player player = new Player(States.ACTIVE, GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90,
-				0.25,0.25, 0, 0,currentTime, 12);
-		*/
 
 		int player_state = ACTIVE;								// estado
 		double player_X = GameLib.WIDTH / 2;					// coordenada x

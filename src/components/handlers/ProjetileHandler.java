@@ -15,6 +15,8 @@ public class ProjetileHandler {
     private EnemyHandler enemyHandler;
 
     public ProjetileHandler(Player player, EnemyHandler enemyHandler){
+        this.enemyProjectileList = new LinkedList<>();
+        this.playerProjectileList = new LinkedList<>();
         this.player = player;
         this.enemyHandler = enemyHandler;
     }

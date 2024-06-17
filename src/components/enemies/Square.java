@@ -21,6 +21,7 @@ public class Square extends Entity implements IEnemy{
         this.angle = 3 * Math.PI / 2;
         this.angleSpeed = 0;
         this.projetileRadius = 2.0;
+        this.nextSquare = currentTime + 120;
         // usar na lista nextEnemy1 = currentTime + 500;
     }
 
@@ -41,9 +42,17 @@ public class Square extends Entity implements IEnemy{
 
 
     public void Andar(long delta) {
+        double previousY = position.getPosY();
         position.walkX(position.getSpeedX() * Math.cos(this.angle) * delta);
         position.walkY(position.getSpeedY() * Math.sin(this.angle) * delta * (-1.0));
         this.angle += this.angleSpeed * delta;
+
+        double threshold = GameLib.HEIGHT * 0.30;
+
+        if(previousY < threshold && getPosY() >= threshold) {
+            if(this.getPosX() < GameLib.WIDTH / 2) this.angleSpeed = 0.003;
+            else this.angleSpeed = -0.003;
+        }
     }
 
     public Boolean exploded(long currentTime) {
