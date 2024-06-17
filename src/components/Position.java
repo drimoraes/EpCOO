@@ -26,12 +26,6 @@ public class Position {
         return this.speedY;
     }
 
-    public void setPosX(double posX) {
-        this.posX = posX;
-    }
-    public void setPosY(double posY) {
-        this.posY = posY;
-    }
     public void setSpeedX(double speedX) {
         this.speedX = speedX;
     }

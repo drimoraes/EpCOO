@@ -20,8 +20,8 @@ public class Projectile {
     }
 
     public void andar(double delta){
-        this.position.setPosX(this.position.getPosX() + (this.position.getSpeedX() * delta));
-        this.position.setPosY(this.position.getPosY() + (this.position.getSpeedY() * delta));
+        this.position.walkX(this.position.getSpeedX() * delta);
+        this.position.walkY(this.position.getSpeedY() * delta);
     }
 
     public Boolean isValid(){

@@ -521,11 +521,15 @@ public class Main {
 			
 			if(player_state == ACTIVE){
 				// Método movimentação
-				if(GameLib.iskeyPressed(GameLib.KEY_UP)) player_Y -= delta * player_VY;
-				System.out.println(player_Y);
-				if(GameLib.iskeyPressed(GameLib.KEY_DOWN)) player_Y += delta * player_VY;
-				if(GameLib.iskeyPressed(GameLib.KEY_LEFT)) player_X -= delta * player_VX;
-				if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)) player_X += delta * player_VY;
+				if(GameLib.iskeyPressed(GameLib.KEY_UP)
+						&& player_Y > 25) player_Y -= delta * player_VY;
+				if(GameLib.iskeyPressed(GameLib.KEY_DOWN)
+						&& player_Y < GameLib.HEIGHT - 10) player_Y += delta * player_VY;
+				if(GameLib.iskeyPressed(GameLib.KEY_LEFT)
+						&& player_X > 5) player_X -= delta * player_VX;
+				if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)
+						&& player_X < GameLib.WIDTH - 10) player_X += delta * player_VY;
+				//System.out.println(String.format("%.2f, %.2f", player_Y, player_X));
 				if(GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
 					
 					if(currentTime > player_nextShot){
@@ -550,10 +554,10 @@ public class Main {
 			/* Verificando se coordenadas do player ainda estão dentro	*/
 			/* da tela de jogo após processar entrada do usuário.       */
 
-			if(player_X < 0.0) player_X = 0.0;
-			if(player_X >= GameLib.WIDTH) player_X = GameLib.WIDTH - 1;
-			if(player_Y < 25.0) player_Y = 25.0;
-			if(player_Y >= GameLib.HEIGHT) player_Y = GameLib.HEIGHT - 1;
+//			if(player_X < 0.0) player_X = 0.0;
+//			if(player_X >= GameLib.WIDTH) player_X = GameLib.WIDTH - 1;
+//			if(player_Y < 25.0) player_Y = 25.0;
+//			if(player_Y >= GameLib.HEIGHT) player_Y = GameLib.HEIGHT - 1;
 
 			/*******************/
 			/* Desenho da cena */
