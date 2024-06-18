@@ -1,7 +1,6 @@
 package components.enemies;
 
 import components.Projectile;
-import mainpackage.States;
 
 import java.util.ArrayList;
 

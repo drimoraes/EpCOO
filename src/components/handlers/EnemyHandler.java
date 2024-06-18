@@ -1,16 +1,12 @@
 package components.handlers;
 
-import components.Projectile;
 import components.enemies.BigSquare;
 import components.enemies.Circle;
 import components.enemies.IEnemy;
 import components.enemies.Square;
-import components.player.Player;
-import mainpackage.States;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 public class EnemyHandler {
     protected ArrayList<IEnemy> enemies = new ArrayList<>();

@@ -4,7 +4,6 @@ import mainpackage.GameLib;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Background {
     private ArrayList<Double> X;

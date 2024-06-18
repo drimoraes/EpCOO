@@ -4,8 +4,6 @@ import components.enemies.DeactivateEnemies;
 import components.handlers.*;
 import components.player.Player;
 
-import java.awt.*;
-
 public class novoMain {
 	public static void busyWait(long time){
 

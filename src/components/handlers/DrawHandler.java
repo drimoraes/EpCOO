@@ -5,7 +5,6 @@ import components.Projectile;
 import components.enemies.IEnemy;
 import components.player.Player;
 import mainpackage.GameLib;
-import mainpackage.States;
 
 import java.awt.*;
 
