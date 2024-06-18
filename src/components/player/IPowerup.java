@@ -1,5 +1,7 @@
 package components.player;
 
+import mainpackage.States;
+
 public interface IPowerup {
     void Andar(long delta);
     Boolean exploded(long currentTime);
@@ -7,6 +9,10 @@ public interface IPowerup {
     double getPosY();
     double getRadius();
     double getPosX();
+    double getEndPowerUp();
+    States getState();
+    Boolean isActive();
     void apply(long currentTime, Player player);
     void draw(double currentTime);
+    void remove(Player player);
 }

@@ -18,16 +18,17 @@ public class Main {
 		long delta;
 		long currentTime = System.currentTimeMillis();
 
-		Player player = new Player(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90,
-				0.25,0.25,currentTime, 12);
+		Player player = new Player(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.80,
+				currentTime, 12);
 
 
 		ProjetileHandler projetileHandler = new ProjetileHandler(player);
 		EnemyHandler enemyHandler = new EnemyHandler(projetileHandler);
 		PowerUpHandler powerUpHandler = new PowerUpHandler();
-		CollisionHandler collisionHandler = new CollisionHandler(player, enemyHandler, projetileHandler, powerUpHandler);
+		CollisionHandler collisionHandler = new CollisionHandler(player, enemyHandler,
+				projetileHandler, powerUpHandler);
 
-		DrawHandler drawHandler = new DrawHandler(player, enemyHandler, projetileHandler);
+		DrawHandler drawHandler = new DrawHandler(player, enemyHandler, projetileHandler, powerUpHandler);
 
 		GameLib.initGraphics();
 
@@ -58,11 +59,11 @@ public class Main {
 			projetileHandler.CheckShoots(delta);
 
 			enemyHandler.Update(currentTime, delta, player.getPosY());
-
+			powerUpHandler.Update(currentTime, delta, player);
 			//projetileHandler.DispararInimigos(currentTime, delta);
 
 			enemyHandler.Add(currentTime);
-
+			powerUpHandler.Add(currentTime);
 			player.checkRevive(currentTime);
 
 			/********************************************/

@@ -12,10 +12,12 @@ public class PowerUpHandler {
 
     public PowerUpHandler() {}
 
-      public void Update(long currentTime, long delta, double playerYPosition){
+      public void Update(long currentTime, long delta, Player player){
         for(Iterator<IPowerup> iterator = powerups.iterator(); iterator.hasNext(); ) {
             IPowerup e = iterator.next();
-            if(e.exploded(currentTime) || e.leaveScreen()){
+            if(e.getEndPowerUp() < currentTime && (e.exploded(currentTime) || e.leaveScreen())){
+                if(e.isActive())
+                    e.remove(player);
                 iterator.remove();
             }
             else{

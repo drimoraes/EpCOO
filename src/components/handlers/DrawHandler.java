@@ -1,6 +1,7 @@
 package components.handlers;
 
 import components.Background;
+import components.player.IPowerup;
 import components.player.Player;
 import components.Projectile;
 import components.enemies.IEnemy;
@@ -14,13 +15,16 @@ public class DrawHandler {
     private Player player;
     private EnemyHandler enemyHandler;
     private ProjetileHandler projectiles;
+    private PowerUpHandler powerUpHandler;
 
-    public DrawHandler(Player player, EnemyHandler enemyHandler, ProjetileHandler projectiles) {
+    public DrawHandler(Player player, EnemyHandler enemyHandler,
+                       ProjetileHandler projectiles, PowerUpHandler powerUpHandler) {
         this.proximo = new Background(20, 0.07, 0.0);
         this.distante = new Background(50, 0.45, 0.0);
         this.player = player;
         this.enemyHandler = enemyHandler;
         this.projectiles = projectiles;
+        this.powerUpHandler = powerUpHandler;
     }
 
     public void continueBackground(long delta){
@@ -33,6 +37,7 @@ public class DrawHandler {
         drawPlayerProjectiles();
         drawEnemiesProjectiles();
         drawEnemies(currentTime);
+        drawPowerUps(currentTime);
     }
 
     private void drawPlayerProjectiles(){
@@ -54,6 +59,12 @@ public class DrawHandler {
     private void drawEnemies(double currentTime){
         for(IEnemy enemy : this.enemyHandler.enemies){
             enemy.draw(currentTime);
+        }
+    }
+
+    private void drawPowerUps(double currentTime){
+        for(IPowerup powerup : powerUpHandler.powerups){
+            powerup.draw(currentTime);
         }
     }
 }

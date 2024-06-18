@@ -6,6 +6,7 @@ import mainpackage.GameLib;
 import mainpackage.States;
 
 import java.awt.*;
+import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,10 +18,12 @@ public class Player extends Entity {
     private double flash;
     private double damage;
     private double projectile_radius;
+    public static final double defaultSpeed = 0.25;
     Scanner scanner = new Scanner(System.in);
 
-    public Player(double entityPosX, double entityPosY, double entitySpeedX, double entitySpeedY, long next_shot, double radius){
-        super(States.ACTIVE, entityPosX, entityPosY, entitySpeedX, entitySpeedY, 0, 0, next_shot, radius);
+    public Player(double entityPosX, double entityPosY, long next_shot, double radius){
+        super(States.ACTIVE, entityPosX, entityPosY, defaultSpeed, defaultSpeed,
+                0, 0, next_shot, radius);
         System.out.println("Digite a quantidade de vidas: ");
         this.lives = scanner.nextInt();
         this.livesTemp = this.lives;
@@ -42,9 +45,9 @@ public class Player extends Entity {
             walkX(delta*getSpeedX()*-1);
         if(GameLib.iskeyPressed(GameLib.KEY_RIGHT) && getPosX() < GameLib.WIDTH - 10)
             walkX(delta* getSpeedX());
+        //System.out.print(getPosX());
         //System.out.print(" ");
         //System.out.println(getPosY());
-        //System.out.print(getPosX());
     }
 
     public ArrayList<Projectile> Shoot(long currentTime){

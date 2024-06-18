@@ -24,6 +24,7 @@ public class CollisionHandler {
         if(playerState == States.ACTIVE){
             enemyProjectilePlayer(currentTime);
             playerEnemy(currentTime);
+            playerPowerUp(currentTime);
         }
         playerProjectileEnemy(currentTime);
     }
@@ -72,7 +73,8 @@ public class CollisionHandler {
            double dy = powerup.getPosY() - this.player.getPosY();
            double dist = Math.sqrt(dx * dx + dy * dy);
 
-           if(dist < (player.getRadius() + powerup.getRadius()) * 0.8){
+           if(dist < (player.getRadius() + powerup.getRadius()) * 0.8
+                   && powerup.getState() == States.ACTIVE){
                powerup.apply(currentTime, this.player);
            }
         }
