@@ -11,9 +11,9 @@ public class Square extends Entity implements IEnemy{
     private double angle;
     private double angleSpeed;
     private double projetileRadius;
+    private Boolean shootNow = false;
     private static long nextSquare = 0;
     private static double squareCounter = 0;
-    private Boolean shootNow = false;
     private static double path = GameLib.HEIGHT *0.2;
 
     public Square(long currentTime, double spawnX){
@@ -93,22 +93,10 @@ public class Square extends Entity implements IEnemy{
         this.next_shot = (long) (currentTime + 200 +Math.random() * 500);
         return projectiles;
     }
-
     public Boolean getNextShoot(long currentTime){
         return shootNow;
     }
 
-    public double getPosY(){
-        return this.position.getPosY();
-    }
-    public double getPosX(){ return this.position.getPosX(); }
-    public double getRadius(){ return this.radius; }
-    public States getState(){
-        return this.state;
-    }
-    public double getExplosionEnd(){
-        return this.explosion_end;
-    }
     public void kill(long currenTime){
         this.state = States.EXPLODING;
         this.explosion_start = currenTime;

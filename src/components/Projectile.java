@@ -7,7 +7,6 @@ public class Projectile {
     private double radius;
     private Position position;
 
-    public Projectile() {}
     public Projectile(double radius, double posX, double posY, double speedX, double speedY) {
         this.radius = radius;
         this.position = new Position(posX, posY, speedX, speedY);

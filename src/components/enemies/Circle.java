@@ -59,21 +59,6 @@ public class    Circle extends Entity implements IEnemy{
     public Boolean getNextShoot(long currentTime){
         return this.next_shot < currentTime;
     }
-    public double getPosY(){
-        return this.position.getPosY();
-    }
-    public double getPosX(){
-        return this.position.getPosX();
-    }
-    public double getRadius(){
-        return this.radius;
-    }
-    public States getState(){
-        return this.state;
-    }
-    public double getExplosionEnd(){
-        return this.explosion_end;
-    }
     public void kill(long currenTime){
         this.state = States.EXPLODING;
         this.explosion_start = currenTime;

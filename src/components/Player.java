@@ -15,30 +15,6 @@ public class Player extends Entity {
         explosion_start, explosion_end, next_shot, radius);
     }
 
-    public double getPosY(){
-        return position.getPosY();
-    }
-
-    public double getPosX(){
-        return position.getPosX();
-    }
-
-    public double getRadius(){
-        return this.radius;
-    }
-
-    public States getState(){
-        return this.state;
-    }
-
-    public double getExplosionStart(){
-        return this.explosion_start;
-    }
-
-    public double getExplosionEnd(){
-        return this.explosion_end;
-    }
-
     public double getNextShoot(){
         return next_shot;
     }

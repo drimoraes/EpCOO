@@ -20,4 +20,21 @@ public class Entity {
         this.next_shot = next_shot;
         this.radius = radius;
     }
+
+    public double getRadius(){
+        return this.radius;
+    };
+    public States getState() {
+        return this.state;
+    }
+    public double getPosY(){
+        return this.position.getPosY();
+    }
+    public double getPosX(){ return this.position.getPosX(); }
+    public double getExplosionEnd(){
+        return this.explosion_end;
+    }
+    public double getExplosionStart(){
+        return this.explosion_start;
+    }
 }

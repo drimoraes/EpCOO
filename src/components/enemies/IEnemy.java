@@ -12,10 +12,8 @@ public interface IEnemy {
     ArrayList<Projectile> Shoot(long currentTime, long delta);
     Boolean getNextShoot(long currentTime);
     double getPosY();
-    double getPosX();
     double getRadius();
-    States getState();
-    double getExplosionEnd();
+    double getPosX();
     void kill(long currentTime);
     void drawEnemy(double currentTime);
 }
