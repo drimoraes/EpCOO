@@ -19,6 +19,8 @@ public class Background {
             this.X.add(Math.random() * GameLib.WIDTH);
             this.Y.add(Math.random() * GameLib.HEIGHT);
         }
+        this.count = count;
+        this.speed = speed;
     }
 
     public void draw(double delta, Color color){

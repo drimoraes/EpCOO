@@ -5,8 +5,6 @@ import components.Projectile;
 import components.enemies.IEnemy;
 import mainpackage.States;
 
-import java.util.LinkedList;
-
 public class CollisionHandler {
     private Player player;
     private EnemyHandler enemyHandler;

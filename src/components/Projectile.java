@@ -1,7 +1,6 @@
 package components;
 
 import mainpackage.GameLib;
-import mainpackage.States;
 
 public class Projectile {
     private double radius;
@@ -14,6 +13,7 @@ public class Projectile {
     public double getRadius(){
         return this.radius;
     }
+
     public double getPosX(){
         return this.position.getPosX();
     }
