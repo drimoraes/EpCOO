@@ -1,6 +1,7 @@
 package components.handlers;
 
 import components.player.IPowerup;
+import components.player.Player;
 import components.player.Speed;
 
 import java.util.ArrayList;

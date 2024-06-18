@@ -1,7 +1,7 @@
 package components.handlers;
 
-import components.player.Player;
 import components.Projectile;
+import components.player.Player;
 
 import java.util.ArrayList;
 import java.util.Iterator;
