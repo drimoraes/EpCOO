@@ -1,6 +1,5 @@
 package components.player;
 
-
 public interface IPowerup {
     void Andar(long delta);
     Boolean exploded(long currentTime);
