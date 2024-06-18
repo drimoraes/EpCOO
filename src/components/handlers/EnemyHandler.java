@@ -52,12 +52,4 @@ public class EnemyHandler {
             this.enemies.add(Square.CreateSquare(currentTime));
         }
     }
-
-//    public void RemoveEnemies(){
-//        for(IEnemy enemy : this.enemies){
-//            if(enemy.getState() == States.INACTIVE){
-//                enemies.remove(enemy);
-//            }
-//        }
-//    }
 }

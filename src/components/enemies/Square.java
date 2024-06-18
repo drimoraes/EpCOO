@@ -12,7 +12,7 @@ public class Square extends Entity implements IEnemy{
     private double angleSpeed;
     private double projetileRadius;
     private Boolean shootNow = false;
-    private static long nextSquare = 0;
+    private static long nextSquare = System.currentTimeMillis()+ 4000;
     private static double squareCounter = 0;
     private static double path = GameLib.HEIGHT *0.2;
 

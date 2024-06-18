@@ -7,11 +7,11 @@ import mainpackage.States;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class    Circle extends Entity implements IEnemy{
+public class Circle extends Entity implements IEnemy{
     private double angle;
     private double angleSpeed;
     private double projetileRadius;
-    private static long nextEnemy = 0;
+    private static long nextEnemy = System.currentTimeMillis() + 2000;
 
     public Circle(long currentTime){
         super(States.ACTIVE, Math.random() * (GameLib.WIDTH - 20.0) + 10.0, -10.0,
