@@ -40,6 +40,14 @@ public abstract class Entity {
     public double getSpeedX(){ return this.position.getSpeedX(); }
     public double getSpeedY(){ return this.position.getSpeedY(); }
 
+    public void setSpeedX(double speedX){
+        this.position.setSpeedX(speedX);
+    }
+    
+    public void setSpeedY(double speedY){
+        this.position.setSpeedY(speedY);
+    }
+
     public void walkX(double distance){
         position.walkX(distance);
     }

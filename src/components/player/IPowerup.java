@@ -1,7 +1,6 @@
 package components.player;
 
 import mainpackage.States;
-import components.Player;
 
 import java.util.ArrayList;
 

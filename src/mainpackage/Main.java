@@ -1,8 +1,8 @@
 package mainpackage;
 
-import components.Player;
 import components.handlers.EnemyHandler;
 import components.handlers.ProjetileHandler;
+import components.player.Player;
 
 import java.awt.Color;
 

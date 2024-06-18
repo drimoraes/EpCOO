@@ -1,8 +1,8 @@
 package mainpackage;
 
-import components.Player;
 import components.enemies.DeactivateEnemies;
 import components.handlers.*;
+import components.player.Player;
 
 import java.awt.*;
 

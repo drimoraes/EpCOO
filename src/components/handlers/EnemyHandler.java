@@ -1,11 +1,11 @@
 package components.handlers;
 
-import components.Player;
 import components.Projectile;
 import components.enemies.BigSquare;
 import components.enemies.Circle;
 import components.enemies.IEnemy;
 import components.enemies.Square;
+import components.player.Player;
 import mainpackage.States;
 
 import java.util.ArrayList;

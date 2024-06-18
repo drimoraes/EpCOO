@@ -1,4 +1,4 @@
-package components;
+package components.player;
 
 import entity.Entity;
 import mainpackage.GameLib;
@@ -8,12 +8,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import components.Projectile;
+
 public class Player extends Entity {
     private int lives;
     private int livesTemp;
-    private int flash;
-    private double damage_start;
-    private double damage_end;
+    private double flash;
+    private double damage;
     private double projectile_radius;
     Scanner scanner = new Scanner(System.in);
 
@@ -23,8 +24,7 @@ public class Player extends Entity {
         this.lives = scanner.nextInt();
         this.livesTemp = this.lives;
         flash = 0;
-        damage_start = 0;
-        damage_end = 0;
+        damage = 0;
         projectile_radius = 2;
     }
 
@@ -59,8 +59,7 @@ public class Player extends Entity {
         if(this.livesTemp > 1){
             this.livesTemp--;
             this.state = States.DAMAGED;
-            this.damage_start = currentTime;
-            this.damage_end = currentTime + 500;
+            this.damage = currentTime + 500;
         }
         else{
             this.livesTemp--;
@@ -78,13 +77,12 @@ public class Player extends Entity {
             GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
         }
         else if(this.getState() == States.DAMAGED){
-            if(flash == 1 && damage_start > currentTime){
+            if(flash > currentTime){
                 GameLib.setColor(Color.WHITE);
             }
             else{
                 GameLib.setColor(Color.BLUE);
-                flash = 1;
-                damage_start = currentTime + 20;
+                flash = currentTime + 20;
             }
             GameLib.drawPlayer(this.getPosX(), this.getPosY(), this.getRadius());
         }
@@ -108,7 +106,7 @@ public class Player extends Entity {
 
     public void checkRevive(long currentTime){
         if(this.state == States.DAMAGED){
-            if(currentTime > this.damage_end){
+            if(currentTime > this.damage){
                 this.state = States.ACTIVE;
             }
         }
