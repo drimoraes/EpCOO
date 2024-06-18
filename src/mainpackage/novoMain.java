@@ -21,7 +21,7 @@ public class novoMain {
 		long currentTime = System.currentTimeMillis();
 
 		Player player = new Player(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90,
-				0.25,0.25, 0, 0,currentTime, 12);
+				0.25,0.25,currentTime, 12);
 
 
 		ProjetileHandler projetileHandler = new ProjetileHandler(player);
@@ -71,10 +71,10 @@ public class novoMain {
 			/* Verificando entrada do usuário (teclado) */
 			/********************************************/
 
-			if(player.getState() == States.ACTIVE){
+			if(player.getState() == States.ACTIVE || player.getState() == States.DAMAGED){
 				// Método movimentação
 				player.CheckMoviment(delta);
-				if(GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
+				if(GameLib.iskeyPressed(GameLib.KEY_CONTROL) && player.getState() == States.ACTIVE){
 					projetileHandler.DispararPlayer(currentTime);
 				}
 			}

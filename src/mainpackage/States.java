@@ -3,7 +3,8 @@ package mainpackage;
 public enum States {
     INACTIVE(0),
     ACTIVE(1),
-    EXPLODING(0);
+    DAMAGED(2),
+    EXPLODING(3);
 
     private final int value;
 
