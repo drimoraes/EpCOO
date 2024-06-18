@@ -46,9 +46,9 @@ public class Square extends Entity implements IEnemy{
 
     public void Andar(long delta) {
         this.shootNow = false;
-        double previousY = position.getPosY();
-        position.walkX(position.getSpeedY() * Math.cos(this.angle) * delta);
-        position.walkY(position.getSpeedY() * Math.sin(this.angle) * delta * (-1.0));
+        double previousY = getPosY();
+        walkX(getSpeedY() * Math.cos(this.angle) * delta);
+        walkY(getSpeedY() * Math.sin(this.angle) * delta * (-1.0));
         this.angle += this.angleSpeed * delta;
 
         double threshold = GameLib.HEIGHT * 0.30;
@@ -74,7 +74,7 @@ public class Square extends Entity implements IEnemy{
     }
 
     public Boolean leaveScreen(){
-        return this.position.getPosX() < -10 || this.position.getPosX() > GameLib.WIDTH + 10;
+        return getPosX() < -10 || getPosX() > GameLib.WIDTH + 10;
     }
 
     public ArrayList<Projectile> Shoot(long currentTime, long delta) {
@@ -84,8 +84,8 @@ public class Square extends Entity implements IEnemy{
 
         for(double angle : angles){
             double a = angle + Math.random() * Math.PI/6 - Math.PI/12;
-            double projX = this.position.getPosX();
-            double projY = this.position.getPosY();
+            double projX = getPosX();
+            double projY = getPosY();
             double projSpeedX = Math.cos(a) * 0.30;
             double projSpeedY = Math.sin(a) * 0.30;
             projectiles.add(new Projectile(this.projetileRadius, projX, projY, projSpeedX, projSpeedY));
@@ -102,7 +102,7 @@ public class Square extends Entity implements IEnemy{
         this.explosion_start = currenTime;
         this.explosion_end = currenTime + 500;
     }
-    public void drawEnemy(double currentTime){
+    public void draw(double currentTime){
         if(this.state == States.EXPLODING){
             double alpha = (currentTime - this.explosion_start)
                     / (this.explosion_end - this.explosion_start);

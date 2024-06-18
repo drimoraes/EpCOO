@@ -17,13 +17,6 @@ public class CollisionHandler {
         this.projetileHandler = projectileHandler;
     }
 
-    /*
-    Testar colisões:
-    PLAYER -> tiro inimigo
-    INIMIGO -> tiro player
-    PLAYER -> INIMIGO
-    */
-
     public void checarColisoes(long currentTime, States playerState){
         if(playerState == States.ACTIVE){
             enemyProjectilePlayer(currentTime);

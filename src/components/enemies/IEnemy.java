@@ -15,5 +15,5 @@ public interface IEnemy {
     double getRadius();
     double getPosX();
     void kill(long currentTime);
-    void drawEnemy(double currentTime);
+    void draw(double currentTime);
 }

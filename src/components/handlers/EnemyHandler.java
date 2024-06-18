@@ -31,17 +31,6 @@ public class EnemyHandler {
                     this.projetileHandler.AdicionarProjectile(e.Shoot(currentTime, delta));
             }
         }
-
-//        for(IEnemy e : this.enemies){
-//            if(e.exploded(currentTime) || e.leaveScreen()){
-//                enemies.remove(e);
-//            }
-//            else{
-//                e.Andar(delta);
-//                if (e.getNextShoot(currentTime) && e.getPosY() < playerYPosition)
-//                    this.projetileHandler.AdicionarProjectile(e.Shoot(currentTime, delta));
-//            }
-//        }
     }
 
     public void Add(long currentTime){

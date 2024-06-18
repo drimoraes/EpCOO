@@ -54,7 +54,7 @@ public class DrawHandler {
 
     private void drawEnemies(double currentTime){
         for(IEnemy enemy : this.enemyHandler.enemies){
-            enemy.drawEnemy(currentTime);
+            enemy.draw(currentTime);
         }
     }
 }

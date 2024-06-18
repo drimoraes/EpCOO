@@ -29,8 +29,8 @@ public class Circle extends Entity implements IEnemy{
     }
 
     public void Andar(long delta) {
-        position.walkX(position.getSpeedX() * Math.cos(this.angle) * delta);
-        position.walkY(position.getSpeedY() * Math.sin(this.angle) * delta * (-1.0));
+        walkX(getSpeedX() * Math.cos(this.angle) * delta);
+        walkY(getSpeedY() * Math.sin(this.angle) * delta * (-1.0));
         this.angle += this.angleSpeed * delta;
     }
 
@@ -39,14 +39,14 @@ public class Circle extends Entity implements IEnemy{
     }
 
     public Boolean leaveScreen(){
-        return this.position.getPosY() > GameLib.HEIGHT + 10;
+        return getPosY() > GameLib.HEIGHT + 10;
     }
 
     public ArrayList<Projectile> Shoot(long currentTime, long delta) {
         ArrayList<Projectile> projectiles = new ArrayList<>();
 
-        double projX = this.position.getPosX();
-        double projY = this.position.getPosY();
+        double projX = getPosX();
+        double projY = getPosY();
         double projSpeedX = Math.cos(this.angle) * 0.45;
         double projSpeedY = Math.sin(this.angle) * 0.45 * (-1.0);
         this.next_shot = (long) (currentTime + 200 + Math.random() * 500);
@@ -65,7 +65,7 @@ public class Circle extends Entity implements IEnemy{
         this.explosion_end = currenTime + 500;
     }
 
-    public void drawEnemy(double currentTime){
+    public void draw(double currentTime){
         if(this.state == States.EXPLODING){
             double alpha = (currentTime - this.explosion_start)
                     / (this.explosion_end - this.explosion_start);

@@ -2,14 +2,10 @@ package components.handlers;
 
 import components.Player;
 import components.Projectile;
-import components.ProjectileList;
-import components.enemies.IEnemy;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 
 public class ProjetileHandler {
     protected LinkedList<Projectile> enemyProjectileList;
@@ -23,7 +19,6 @@ public class ProjetileHandler {
     }
 
     public void DispararPlayer(long currentTime){
-        // CHECAR NO CODIGO MAIN E DEPOIS CHAMAR O DISPAROSPLAYER if(GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
         if(currentTime > player.getNextShoot()){
             this.playerProjectileList.addAll(player.Shoot(currentTime));
         }
@@ -49,14 +44,5 @@ public class ProjetileHandler {
                 iProjectile.andar(delta);
             }
         }
-//
-//        for(Projectile iProjectile : projectileList){
-//            if(!iProjectile.isValid()){
-//                projectileList.remove(iProjectile);
-//            }
-//            else{
-//                iProjectile.andar(delta);
-//            }
-//        }
     }
 }

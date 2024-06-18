@@ -3,9 +3,9 @@ package entity;
 import components.Position;
 import mainpackage.States;
 
-public class Entity {
+public abstract class Entity {
     protected States state;
-    protected Position position;
+    private Position position;
     protected double explosion_start;
     protected double explosion_end;
     protected long next_shot;
@@ -37,4 +37,16 @@ public class Entity {
     public double getExplosionStart(){
         return this.explosion_start;
     }
+    public double getSpeedX(){ return this.position.getSpeedX(); }
+    public double getSpeedY(){ return this.position.getSpeedY(); }
+
+    public void walkX(double distance){
+        position.walkX(distance);
+    }
+
+    public void walkY(double distance){
+        position.walkY(distance);
+    }
+
+    public abstract void draw(double currentTime);
 }

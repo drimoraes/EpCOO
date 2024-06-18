@@ -20,21 +20,21 @@ public class Player extends Entity {
     }
 
     public void CheckMoviment(long delta){
-        if(GameLib.iskeyPressed(GameLib.KEY_UP) && this.position.getPosY() > 25)
-            this.position.walkY(delta*this.position.getSpeedY()*-1);
-        if(GameLib.iskeyPressed(GameLib.KEY_DOWN) && this.position.getPosY() < GameLib.HEIGHT - 10)
-            this.position.walkY(delta*this.position.getSpeedY());
-        if(GameLib.iskeyPressed(GameLib.KEY_LEFT) && this.position.getPosX() > 5)
-            this.position.walkX(delta*this.position.getSpeedX()*-1);
-        if(GameLib.iskeyPressed(GameLib.KEY_RIGHT) && this.position.getPosX() < GameLib.WIDTH - 10)
-            this.position.walkX(delta*this.position.getSpeedX());
+        if(GameLib.iskeyPressed(GameLib.KEY_UP) && getPosY() > 25)
+            walkY(delta* getSpeedY()*-1);
+        if(GameLib.iskeyPressed(GameLib.KEY_DOWN) && getPosY() < GameLib.HEIGHT - 10)
+            walkY(delta*getSpeedY());
+        if(GameLib.iskeyPressed(GameLib.KEY_LEFT) && getPosX() > 5)
+            walkX(delta*getSpeedX()*-1);
+        if(GameLib.iskeyPressed(GameLib.KEY_RIGHT) && getPosX() < GameLib.WIDTH - 10)
+            walkX(delta* getSpeedX());
     }
 
     public ArrayList<Projectile> Shoot(long currentTime){
         this.next_shot = currentTime + 100;
         ArrayList<Projectile> projectiles = new ArrayList<>();
-        var projectile = new Projectile(projectile_radius, this.position.getPosX(),
-                this.position.getPosY() - 2 * this.radius, 0, -1);
+        var projectile = new Projectile(projectile_radius, getPosX(),
+                getPosY() - 2 * this.radius, 0, -1);
         projectiles.add(projectile);
         return projectiles;
     }
