@@ -1,7 +1,6 @@
 package components.enemies;
 
 import components.Projectile;
-
 import java.util.ArrayList;
 
 public interface IEnemy {

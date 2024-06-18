@@ -1,7 +1,5 @@
 package components.player;
 
-import mainpackage.States;
-import java.util.ArrayList;
 
 public interface IPowerup {
     void Andar(long delta);
