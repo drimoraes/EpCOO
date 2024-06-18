@@ -7,7 +7,7 @@ import mainpackage.States;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Circle extends Entity implements IEnemy{
+public class    Circle extends Entity implements IEnemy{
     private double angle;
     private double angleSpeed;
     private double projetileRadius;

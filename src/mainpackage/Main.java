@@ -396,36 +396,36 @@ public class Main {
 						enemy2_states[i] = INACTIVE;
 					}
 					else {
-						
+
 						boolean shootNow = false;
 						double previousY = enemy2_Y[i];
-												
+
 						enemy2_X[i] += enemy2_V[i] * Math.cos(enemy2_angle[i]) * delta;
 						enemy2_Y[i] += enemy2_V[i] * Math.sin(enemy2_angle[i]) * delta * (-1.0);
 						enemy2_angle[i] += enemy2_RV[i] * delta;
-						
+
 						double threshold = GameLib.HEIGHT * 0.30;
-						
+
 						if(previousY < threshold && enemy2_Y[i] >= threshold) {
-							
+
 							if(enemy2_X[i] < GameLib.WIDTH / 2) enemy2_RV[i] = 0.003;
 							else enemy2_RV[i] = -0.003;
 						}
-						
+
 						if(enemy2_RV[i] > 0 && Math.abs(enemy2_angle[i] - 3 * Math.PI) < 0.05){
-							
+
 							enemy2_RV[i] = 0.0;
 							enemy2_angle[i] = 3 * Math.PI;
 							shootNow = true;
 						}
-						
+
 						if(enemy2_RV[i] < 0 && Math.abs(enemy2_angle[i]) < 0.05){
-							
+
 							enemy2_RV[i] = 0.0;
 							enemy2_angle[i] = 0.0;
 							shootNow = true;
 						}
-																		
+
 						if(shootNow){
 
 							double [] angles = { Math.PI/2 + Math.PI/8, Math.PI/2, Math.PI/2 - Math.PI/8 };
@@ -494,7 +494,6 @@ public class Main {
 						nextEnemy2 = currentTime + 120;
 					}
 					else {
-						
 						enemy2_count = 0;
 						enemy2_spawnX = Math.random() > 0.5 ? GameLib.WIDTH * 0.2 : GameLib.WIDTH * 0.8;
 						nextEnemy2 = (long) (currentTime + 3000 + Math.random() * 3000);

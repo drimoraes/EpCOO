@@ -14,6 +14,7 @@ public class Square extends Entity implements IEnemy{
     private static long nextSquare = 0;
     private static double squareCounter = 0;
     private Boolean shootNow = false;
+    private static double path = GameLib.HEIGHT *0.2;
 
     public Square(long currentTime, double spawnX){
         super(States.ACTIVE, spawnX, -10.0,
@@ -22,7 +23,6 @@ public class Square extends Entity implements IEnemy{
         this.angle = 3 * Math.PI / 2;
         this.angleSpeed = 0;
         this.projetileRadius = 2.0;
-        this.nextSquare = currentTime + 120;
         // usar na lista nextEnemy1 = currentTime + 500;
     }
 
@@ -31,21 +31,23 @@ public class Square extends Entity implements IEnemy{
     }
 
     public static Square CreateSquare(long currentTime){
-        if (squareCounter < 10){
+        if (squareCounter < 9){
             squareCounter++;
             nextSquare = currentTime + 120;
-            return new Square(currentTime, GameLib.WIDTH * 0.20);
+            return new Square(currentTime, path);
         }
         squareCounter = 0;
         nextSquare = (long) (currentTime + 3000 + Math.random() * 3000);
-        return new Square(currentTime, Math.random() > 0.5 ? GameLib.WIDTH * 0.2 : GameLib.WIDTH * 0.8);
+        Square newSquare = new Square(currentTime, path);
+        path = Math.random() > 0.5 ? GameLib.WIDTH * 0.2 : GameLib.WIDTH * 0.8;
+        return newSquare;
     }
 
 
     public void Andar(long delta) {
         this.shootNow = false;
         double previousY = position.getPosY();
-        position.walkX(position.getSpeedX() * Math.cos(this.angle) * delta);
+        position.walkX(position.getSpeedY() * Math.cos(this.angle) * delta);
         position.walkY(position.getSpeedY() * Math.sin(this.angle) * delta * (-1.0));
         this.angle += this.angleSpeed * delta;
 
