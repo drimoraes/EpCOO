@@ -33,7 +33,7 @@ public class Player extends Entity {
     public ArrayList<Projectile> Shoot(long currentTime){
         this.next_shot = currentTime + 100;
         ArrayList<Projectile> projectiles = new ArrayList<>();
-        var projectile = new Projectile(projectile_radius, getPosX(),
+        Projectile projectile = new Projectile(projectile_radius, getPosX(),
                 getPosY() - 2 * this.radius, 0, -1);
         projectiles.add(projectile);
         return projectiles;
