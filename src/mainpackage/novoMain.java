@@ -2,10 +2,7 @@ package mainpackage;
 
 import components.Player;
 import components.enemies.DeactivateEnemies;
-import components.handlers.CollisionHandler;
-import components.handlers.DrawHandler;
-import components.handlers.EnemyHandler;
-import components.handlers.ProjetileHandler;
+import components.handlers.*;
 
 import java.awt.*;
 
@@ -29,7 +26,8 @@ public class novoMain {
 
 		ProjetileHandler projetileHandler = new ProjetileHandler(player);
 		EnemyHandler enemyHandler = new EnemyHandler(projetileHandler);
-		CollisionHandler collisionHandler = new CollisionHandler(player, enemyHandler, projetileHandler);
+		PowerUpHandler powerUpHandler = new PowerUpHandler();
+		CollisionHandler collisionHandler = new CollisionHandler(player, enemyHandler, projetileHandler, powerUpHandler);
 
 		DrawHandler drawHandler = new DrawHandler(player, enemyHandler, projetileHandler);
 
