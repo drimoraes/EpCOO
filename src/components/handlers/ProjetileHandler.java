@@ -26,7 +26,7 @@ public class ProjetileHandler {
 
     public void AdicionarProjectile(ArrayList<Projectile> projectiles){
         this.enemyProjectileList.addAll(projectiles);
-        System.out.println(this.enemyProjectileList.size());
+        //System.out.println(this.enemyProjectileList.size());
     }
 
     public void CheckShoots(long delta){

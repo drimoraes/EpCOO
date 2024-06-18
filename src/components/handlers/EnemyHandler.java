@@ -2,6 +2,7 @@ package components.handlers;
 
 import components.Player;
 import components.Projectile;
+import components.enemies.BigSquare;
 import components.enemies.Circle;
 import components.enemies.IEnemy;
 import components.enemies.Square;
@@ -39,6 +40,9 @@ public class EnemyHandler {
         }
         if(currentTime > Square.getNextSquare()) {
             this.enemies.add(Square.CreateSquare(currentTime));
+        }
+        if(currentTime > BigSquare.getNextBigSquare() && !BigSquare.alreadySpawned()){
+            this.enemies.add(new BigSquare(currentTime));
         }
     }
 }

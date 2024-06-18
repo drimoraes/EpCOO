@@ -1,6 +1,7 @@
 package mainpackage;
 
 import components.Player;
+import components.enemies.DeactivateEnemies;
 import components.handlers.CollisionHandler;
 import components.handlers.DrawHandler;
 import components.handlers.EnemyHandler;
@@ -33,6 +34,8 @@ public class novoMain {
 		DrawHandler drawHandler = new DrawHandler(player, enemyHandler, projetileHandler);
 
 		GameLib.initGraphics();
+
+		DeactivateEnemies.Deactivate();
 
 		while(running){
 		
