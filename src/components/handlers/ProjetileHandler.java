@@ -1,6 +1,6 @@
 package components.handlers;
 
-import components.Player;
+import components.player.Player;
 import components.Projectile;
 
 import java.util.ArrayList;

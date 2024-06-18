@@ -1,6 +1,5 @@
 package components.handlers;
 
-import components.Player;
 import components.player.IPowerup;
 import components.player.Speed;
 

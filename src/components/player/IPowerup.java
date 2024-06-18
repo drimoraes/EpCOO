@@ -1,10 +1,5 @@
 package components.player;
 
-import mainpackage.States;
-import components.Player;
-
-import java.util.ArrayList;
-
 public interface IPowerup {
     void Andar(long delta);
     Boolean exploded(long currentTime);

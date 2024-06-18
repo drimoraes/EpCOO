@@ -1,16 +1,9 @@
 package components.handlers;
 
-import components.Player;
-import components.Projectile;
-import components.enemies.BigSquare;
-import components.enemies.Circle;
-import components.enemies.IEnemy;
-import components.enemies.Square;
-import mainpackage.States;
+import components.enemies.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 public class EnemyHandler {
     protected ArrayList<IEnemy> enemies = new ArrayList<>();
@@ -41,8 +34,9 @@ public class EnemyHandler {
         if(currentTime > Square.getNextSquare()) {
             this.enemies.add(Square.CreateSquare(currentTime));
         }
-        if(currentTime > BigSquare.getNextBigSquare() && !BigSquare.alreadySpawned()){
-            this.enemies.add(new BigSquare(currentTime));
+        if(currentTime > BigSquare.getNextPreparation() && !BigSquare.alreadySpawned()){
+            DeactivateEnemies.Deactivate();
+            if(currentTime > 2000) this.enemies.add(new BigSquare(currentTime));
         }
     }
 }

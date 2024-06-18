@@ -1,5 +1,6 @@
-package components;
+package components.player;
 
+import components.Projectile;
 import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;

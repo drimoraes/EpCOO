@@ -5,8 +5,6 @@ import mainpackage.States;
 
 import java.awt.*;
 
-import components.Player;
-
 public class Speed extends Entity implements IPowerup {
 
     private double angleSpeed;
@@ -44,8 +42,8 @@ public class Speed extends Entity implements IPowerup {
         this.state = States.EXPLODING;
         this.explosion_start = currenTime;
         this.explosion_end = currenTime + 500;
-        player.setSpeedX += player.getSpeedX() * 0.3;
-        player.setSpeedY += player.getSpeedY() * 0.3;
+        //player.setSpeedX += player.getSpeedX() * 0.3;
+        //player.setSpeedY += player.getSpeedY() * 0.3;
 
     }
 

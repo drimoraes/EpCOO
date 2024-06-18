@@ -1,9 +1,5 @@
 package mainpackage;
 
-import components.Player;
-import components.handlers.EnemyHandler;
-import components.handlers.ProjetileHandler;
-
 import java.awt.Color;
 
 public class Main {

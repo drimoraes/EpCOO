@@ -1,10 +1,8 @@
 package mainpackage;
 
-import components.Player;
+import components.player.Player;
 import components.enemies.DeactivateEnemies;
 import components.handlers.*;
-
-import java.awt.*;
 
 public class novoMain {
 	public static void busyWait(long time){
@@ -33,7 +31,7 @@ public class novoMain {
 
 		GameLib.initGraphics();
 
-		DeactivateEnemies.Deactivate();
+		//DeactivateEnemies.Deactivate();
 
 		while(running){
 		

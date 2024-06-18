@@ -1,6 +1,6 @@
 package components.handlers;
 
-import components.Player;
+import components.player.Player;
 import components.Projectile;
 import components.enemies.IEnemy;
 import components.player.IPowerup;
