@@ -5,8 +5,6 @@ import mainpackage.States;
 
 import java.awt.*;
 
-import components.Player;
-
 public class Speed extends Entity implements IPowerup {
 
     private double angleSpeed;
