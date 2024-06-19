@@ -113,6 +113,8 @@ public class BigSquare extends Entity implements IEnemy {
             DeactivateEnemies.Activate(currenTime);
             this.state = States.EXPLODING;
             this.explosion_start = currenTime;
+            nextPreparation = currenTime + 10000;
+            this.spawned = false;
             this.explosion_end = currenTime + 500;
         }
     }
