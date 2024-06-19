@@ -13,7 +13,6 @@ public class Main {
 
 		/* Indica que o jogo está em execução */
 		boolean running = true;
-
 		/* variáveis usadas no controle de tempo efetuado no main loop */
 		long delta;
 		long currentTime = System.currentTimeMillis();
@@ -31,6 +30,20 @@ public class Main {
 		DrawHandler drawHandler = new DrawHandler(player, enemyHandler, projetileHandler, powerUpHandler);
 
 		GameLib.initGraphics();
+
+		powerUpHandler.addStartGame();
+		while(!player.hasGun()){
+			delta = System.currentTimeMillis() - currentTime;
+			currentTime = System.currentTimeMillis();
+
+			player.CheckMoviment(delta);
+			drawHandler.drawEntities(currentTime);
+			collisionHandler.checarColisoes(currentTime, player.getState());
+			powerUpHandler.Update(currentTime, delta, player);
+
+			GameLib.display();
+			busyWait(currentTime + 5);
+		}
 
 		//DeactivateEnemies.Deactivate();
 

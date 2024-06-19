@@ -6,11 +6,8 @@ import mainpackage.GameLib;
 import mainpackage.States;
 
 import java.awt.*;
-import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import components.Projectile;
 
 public class Player extends Entity {
     private int lives;
@@ -19,6 +16,7 @@ public class Player extends Entity {
     private double damage;
     private double projectile_radius;
     public static final double defaultSpeed = 0.25;
+    private IGun gun;
     Scanner scanner = new Scanner(System.in);
 
     public Player(double entityPosX, double entityPosY, long next_shot, double radius){
@@ -33,7 +31,7 @@ public class Player extends Entity {
     }
 
     public double getNextShoot(){
-        return next_shot;
+        return gun.getNextShoot();
     }
 
     public void CheckMoviment(long delta){
@@ -51,12 +49,16 @@ public class Player extends Entity {
     }
 
     public ArrayList<Projectile> Shoot(long currentTime){
-        this.next_shot = currentTime + 100;
-        ArrayList<Projectile> projectiles = new ArrayList<>();
-        Projectile projectile = new Projectile(projectile_radius, getPosX(),
-                getPosY() - 2 * this.radius, 0, -1);
-        projectiles.add(projectile);
-        return projectiles;
+        return gun.shoot(currentTime, getPosX(), getPosY(), getRadius());
+    }
+
+    public Boolean hasGun(){
+        if(gun != null) return true;
+        return false;
+    }
+
+    protected void setGun(IGun gun) {
+        this.gun = gun;
     }
 
     public void kill(long currentTime){

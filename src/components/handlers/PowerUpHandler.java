@@ -1,5 +1,6 @@
 package components.handlers;
 
+import components.player.DefaultGun;
 import components.player.IPowerup;
 import components.player.Player;
 import components.player.Speed;
@@ -26,11 +27,14 @@ public class PowerUpHandler {
         }
     }
 
-      public void Add(long currentTime){
+    public void Add(long currentTime){
         if(currentTime > Speed.getNextPowerUp()) {
             this.powerups.add(new Speed(currentTime));
         }
     }
 
+    public void addStartGame(){
+        this.powerups.add(new DefaultGun());
+    }
     
 }
