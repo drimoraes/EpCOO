@@ -80,7 +80,7 @@ public class Speed extends Entity implements IPowerup {
                     / (this.explosion_end - this.explosion_start);
             GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
         }
-        else{
+        else if(this.state != States.INACTIVE){
             GameLib.setColor(Color.PINK);
             GameLib.drawDiamond(this.getPosX(), this.getPosY(), this.getRadius());
         }
