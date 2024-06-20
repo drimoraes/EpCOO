@@ -36,7 +36,7 @@ public class EnemyHandler {
         }
         if(currentTime > BigSquare.getNextPreparation() && !BigSquare.alreadySpawned()){
             DeactivateEnemies.Deactivate();
-            if(currentTime > 3000) this.enemies.add(new BigSquare(currentTime));
+            if(currentTime > BigSquare.getNextPreparation() + 3000) this.enemies.add(new BigSquare(currentTime));
         }
     }
 }
