@@ -12,7 +12,7 @@ public class BigSquare extends Entity implements IEnemy {
     private double angle;
     private double angleSpeed;
     private double projetileRadius;
-    protected static long nextPreparation = System.currentTimeMillis() + 10000;
+    protected static long nextPreparation = System.currentTimeMillis() + 20000;
     protected static Boolean spawned = false;
     private double direction = -1;
     private double life;
@@ -113,7 +113,7 @@ public class BigSquare extends Entity implements IEnemy {
             DeactivateEnemies.Activate(currenTime);
             this.state = States.EXPLODING;
             this.explosion_start = currenTime;
-            nextPreparation = currenTime + 10000;
+            nextPreparation = currenTime + 20000;
             this.spawned = false;
             this.explosion_end = currenTime + 500;
         }
