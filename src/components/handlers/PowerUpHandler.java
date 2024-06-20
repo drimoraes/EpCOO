@@ -1,10 +1,8 @@
 package components.handlers;
 
-import components.player.DefaultGun;
-import components.player.IPowerup;
-import components.player.Player;
-import components.player.Speed;
+import components.player.*;
 
+import javax.crypto.ShortBufferException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -30,6 +28,12 @@ public class PowerUpHandler {
     public void Add(long currentTime){
         if(currentTime > Speed.getNextPowerUp()) {
             this.powerups.add(new Speed(currentTime));
+        }
+        if(currentTime > DoubleGun.getNextPowerUp()){
+            this.powerups.add(new DoubleGun(currentTime));
+        }
+        if(currentTime > Shield.getNextPowerUp()){
+            this.powerups.add(new Shield(currentTime));
         }
     }
 

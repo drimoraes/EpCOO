@@ -14,6 +14,8 @@ public class Player extends Entity {
     private int livesTemp;
     private double flash;
     private double damage;
+    private double shield;
+    private double shieldTemp;
     private double projectile_radius;
     public static final double defaultSpeed = 0.25;
     private IGun gun;
@@ -28,6 +30,8 @@ public class Player extends Entity {
         flash = 0;
         damage = 0;
         projectile_radius = 2;
+        this.shield = 0;
+        this.shieldTemp = 0;
     }
 
     public double getNextShoot(){
@@ -53,16 +57,29 @@ public class Player extends Entity {
     }
 
     public Boolean hasGun(){
-        if(gun != null) return true;
-        return false;
+        return gun != null;
+    }
+
+    protected void setShield(int shieldValue){
+        this.shield = shieldValue;
+        this.shieldTemp = shieldValue;
     }
 
     protected void setGun(IGun gun) {
         this.gun = gun;
     }
 
+    protected void removeGun(){
+        this.gun.remove(this);
+    }
+
     public void kill(long currentTime){
-        if(this.livesTemp > 1){
+        if(this.shieldTemp > 0){
+            this.shieldTemp--;
+            this.state = States.DAMAGED;
+            this.damage = currentTime + 200;
+        }
+        else if(this.livesTemp > 1){
             this.livesTemp--;
             this.state = States.DAMAGED;
             this.damage = currentTime + 500;
@@ -90,9 +107,14 @@ public class Player extends Entity {
                 GameLib.setColor(Color.BLUE);
                 flash = currentTime + 20;
             }
+
             GameLib.drawPlayer(this.getPosX(), this.getPosY(), this.getRadius());
         }
         else{
+            if(shieldTemp > 0){
+                GameLib.setColor(Color.YELLOW);
+                GameLib.drawCircle(this.getPosX(), this.getPosY(), this.getRadius() + 3);
+            }
             GameLib.setColor(Color.BLUE);
             GameLib.drawPlayer(this.getPosX(), this.getPosY(), this.getRadius());
         }
@@ -100,8 +122,16 @@ public class Player extends Entity {
         double barLenght = 200;
         double barHeight = 25;
         // Desenha as vidas
-        GameLib.setColor(Color.RED);
-        GameLib.fillRect(GameLib.WIDTH*0.5-(barLenght*((double)lives-livesTemp)/(2*lives)), GameLib.HEIGHT-(50+barHeight/2), barLenght*((double)livesTemp/lives), 25);
+        if(shieldTemp > 0){
+            GameLib.setColor(Color.YELLOW);
+            GameLib.fillRect(GameLib.WIDTH*0.5-(barLenght*((double)shield-shieldTemp)/(2*shield)),
+                    GameLib.HEIGHT-(50+barHeight/2), barLenght*((double)shieldTemp/shield),
+                    25);
+        }
+        else{
+            GameLib.setColor(Color.RED);
+            GameLib.fillRect(GameLib.WIDTH*0.5-(barLenght*((double)lives-livesTemp)/(2*lives)), GameLib.HEIGHT-(50+barHeight/2), barLenght*((double)livesTemp/lives), 25);
+        }
         // Desenha a barra de vidas
         GameLib.setColor(Color.WHITE);
         GameLib.drawLine(GameLib.WIDTH*0.5-barLenght/2, GameLib.HEIGHT-50, GameLib.WIDTH*0.5+barLenght/2, GameLib.HEIGHT-50);
