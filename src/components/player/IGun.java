@@ -1,8 +1,6 @@
 package components.player;
 
 import components.Projectile;
-import mainpackage.States;
-
 import java.util.ArrayList;
 
 interface IGun {

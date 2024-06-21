@@ -1,6 +1,5 @@
 package mainpackage;
 
-import components.enemies.DeactivateEnemies;
 import components.handlers.*;
 import components.player.Player;
 

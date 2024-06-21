@@ -4,7 +4,6 @@ import components.Projectile;
 import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
-
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -114,8 +113,8 @@ public class BigSquare extends Entity implements IEnemy {
             this.state = States.EXPLODING;
             this.explosion_start = currenTime;
             nextPreparation = currenTime + 20000;
-            this.spawned = false;
             this.explosion_end = currenTime + 500;
+            spawned = false;
         }
     }
     public void draw(double currentTime){

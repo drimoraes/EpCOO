@@ -1,7 +1,6 @@
 package components.handlers;
 
 import components.enemies.*;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 

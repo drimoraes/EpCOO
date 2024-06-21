@@ -4,7 +4,6 @@ import components.Projectile;
 import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,7 +15,6 @@ public class Player extends Entity {
     private double damage;
     private double shield;
     private double shieldTemp;
-    private double projectile_radius;
     public static final double defaultSpeed = 0.25;
     private IGun gun;
     Scanner scanner = new Scanner(System.in);
@@ -29,7 +27,6 @@ public class Player extends Entity {
         this.livesTemp = this.lives;
         flash = 0;
         damage = 0;
-        projectile_radius = 2;
         this.shield = 0;
         this.shieldTemp = 0;
     }

@@ -1,9 +1,9 @@
 package components.enemies;
+
 import components.Projectile;
 import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
-
 import java.awt.*;
 import java.util.ArrayList;
 
