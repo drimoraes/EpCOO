@@ -1,9 +1,9 @@
 package components.handlers;
 
-import components.Projectile;
 import components.enemies.IEnemy;
 import components.player.IPowerup;
 import components.player.Player;
+import components.Projectile;
 import mainpackage.States;
 
 public class CollisionHandler {
@@ -12,15 +12,14 @@ public class CollisionHandler {
     private ProjetileHandler projetileHandler;
     private PowerUpHandler powerUpHandler;
 
-    public CollisionHandler(Player player, EnemyHandler enemyHandler,
-                            ProjetileHandler projectileHandler, PowerUpHandler powerUpHandler) {
+    public CollisionHandler(Player player, EnemyHandler enemyHandler, ProjetileHandler projectileHandler, PowerUpHandler powerUpHandler) {
         this.player = player;
         this.enemyHandler = enemyHandler;
         this.projetileHandler = projectileHandler;
         this.powerUpHandler = powerUpHandler;
     }
 
-    public void checarColisoes(long currentTime, States playerState){
+    public void checkCollision(long currentTime, States playerState){
         if(playerState == States.ACTIVE){
             enemyProjectilePlayer(currentTime);
             playerEnemy(currentTime);
@@ -73,8 +72,7 @@ public class CollisionHandler {
            double dy = powerup.getPosY() - this.player.getPosY();
            double dist = Math.sqrt(dx * dx + dy * dy);
 
-           if(dist < (player.getRadius() + powerup.getRadius()) * 0.8
-                   && powerup.getState() == States.ACTIVE){
+           if(dist<(player.getRadius() + powerup.getRadius())*0.8 && powerup.getState()==States.ACTIVE){
                powerup.apply(currentTime, this.player);
            }
         }

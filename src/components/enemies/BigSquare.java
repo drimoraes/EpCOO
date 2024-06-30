@@ -1,38 +1,30 @@
 package components.enemies;
 
+import java.awt.*;
+import java.util.ArrayList;
 import components.Projectile;
 import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
 
-import java.awt.*;
-import java.util.ArrayList;
-
 public class BigSquare extends Entity implements IEnemy {
-    private double angle;
-    private double angleSpeed;
     private double projetileRadius;
-    protected static long nextPreparation = System.currentTimeMillis() + 20000;
-    protected static Boolean spawned = false;
     private double direction = -1;
     private double life;
     private double damage_end;
     private double flash;
     private double minimumY;
+    protected static Boolean spawned = false;
+    protected static long nextPreparation = System.currentTimeMillis() + 20000;
 
     public BigSquare(long currentTime){
-        super(States.ACTIVE, GameLib.WIDTH / 2, -20,
-                0.3,0.5,0,0,
-                currentTime + 500, 40);
-        this.angle = 3 * Math.PI / 2;
-        this.angleSpeed = 0;
-        this.projetileRadius = 4.0;
+        super(States.ACTIVE, GameLib.WIDTH / 2, -20, 0.3,0.5,0,0, currentTime + 500, 40);
         spawned = true;
-        this.life = 200;
+        this.projetileRadius = 4.0;
+        this.life = 500;
         this.damage_end = 0;
         this.flash = 0;
         minimumY = 90;
-        // usar na lista nextEnemy1 = currentTime + 500;
     }
 
     public static Boolean alreadySpawned(){
@@ -43,7 +35,7 @@ public class BigSquare extends Entity implements IEnemy {
         return nextPreparation;
     }
 
-    public void Andar(long delta) { //
+    public void walk(long delta) { //
         if(getPosY() < this.minimumY){
             walkY(getSpeedY()*delta);
             this.state = States.INACTIVE;
@@ -51,15 +43,9 @@ public class BigSquare extends Entity implements IEnemy {
         }
         if(getPosX() > GameLib.WIDTH - 40){
             this.direction = -1;
-            System.out.print(getPosX());
-            System.out.print(" ");
-            System.out.println(getPosY());
         }
         else if(getPosX() < 60){
             this.direction = 1;
-            System.out.print(getPosX());
-            System.out.print(" ");
-            System.out.println(getPosY());
         }
         walkX(getSpeedX() * delta * this.direction);
     }
@@ -97,6 +83,7 @@ public class BigSquare extends Entity implements IEnemy {
         this.next_shot = (long) (currentTime + 200 +Math.random() * 500);
         return projectiles;
     }
+
     public Boolean getNextShoot(long currentTime){
         if(this.getPosY() < this.minimumY) return false;
         return next_shot < currentTime;
@@ -107,21 +94,21 @@ public class BigSquare extends Entity implements IEnemy {
         if (this.life > 1){
             this.life--;
             this.state = States.DAMAGED;
-            this.damage_end = currenTime + 500;
+            this.damage_end = currenTime + 100;
         }
         else{
             DeactivateEnemies.Activate(currenTime);
             this.state = States.EXPLODING;
             this.explosion_start = currenTime;
-            nextPreparation = currenTime + 20000;
-            this.spawned = false;
             this.explosion_end = currenTime + 500;
+            nextPreparation = currenTime + 20000;
+            spawned = false;
         }
     }
+
     public void draw(double currentTime){
         if(this.state == States.EXPLODING){
-            double alpha = (currentTime - this.explosion_start)
-                    / (this.explosion_end - this.explosion_start);
+            double alpha = (currentTime - this.explosion_start) / (this.explosion_end - this.explosion_start);
             GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
         }
         else if(this.getState() == States.DAMAGED){

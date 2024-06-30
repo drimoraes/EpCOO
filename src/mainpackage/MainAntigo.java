@@ -6,7 +6,7 @@ public class MainAntigo {
 	
 	/* Constantes relacionadas aos estados que os elementos   */
 	/* do jogo (player, projeteis ou inimigos) podem assumir. */
-
+	
 	public static final int INACTIVE = 0;
 	public static final int ACTIVE = 1;
 	public static final int EXPLODING = 2;
@@ -69,7 +69,7 @@ public class MainAntigo {
 		long currentTime = System.currentTimeMillis();
 
 		/* variáveis do player */
-
+		
 		int player_state = ACTIVE;								// estado
 		double player_X = GameLib.WIDTH / 2;					// coordenada x
 		double player_Y = GameLib.HEIGHT * 0.90;				// coordenada y
@@ -165,7 +165,7 @@ public class MainAntigo {
 		
 		/*************************************************************************************************/
 		/*                                                                                               */
-		/* mainpackage.Main loop do jogo                                                                             */
+		/* Main loop do jogo                                                                             */
 		/*                                                                                               */
 		/* O main loop do jogo possui executa as seguintes operações:                                    */
 		/*                                                                                               */
@@ -358,12 +358,12 @@ public class MainAntigo {
 							int free = findFreeIndex(e_projectile_states);
 							
 							if(free < e_projectile_states.length){
-
+								
 								e_projectile_X[free] = enemy1_X[i];
 								e_projectile_Y[free] = enemy1_Y[i];
 								e_projectile_VX[free] = Math.cos(enemy1_angle[i]) * 0.45;
 								e_projectile_VY[free] = Math.sin(enemy1_angle[i]) * 0.45 * (-1.0);
-								e_projectile_states[free] = ACTIVE;
+								e_projectile_states[free] = 1;
 								
 								enemy1_nextShoot[i] = (long) (currentTime + 200 + Math.random() * 500);
 							}
@@ -377,7 +377,7 @@ public class MainAntigo {
 			for(int i = 0; i < enemy2_states.length; i++){
 				
 				if(enemy2_states[i] == EXPLODING){
-
+					
 					if(currentTime > enemy2_explosion_end[i]){
 						
 						enemy2_states[i] = INACTIVE;
@@ -392,36 +392,36 @@ public class MainAntigo {
 						enemy2_states[i] = INACTIVE;
 					}
 					else {
-
+						
 						boolean shootNow = false;
 						double previousY = enemy2_Y[i];
-
+												
 						enemy2_X[i] += enemy2_V[i] * Math.cos(enemy2_angle[i]) * delta;
 						enemy2_Y[i] += enemy2_V[i] * Math.sin(enemy2_angle[i]) * delta * (-1.0);
 						enemy2_angle[i] += enemy2_RV[i] * delta;
-
+						
 						double threshold = GameLib.HEIGHT * 0.30;
-
+						
 						if(previousY < threshold && enemy2_Y[i] >= threshold) {
-
+							
 							if(enemy2_X[i] < GameLib.WIDTH / 2) enemy2_RV[i] = 0.003;
 							else enemy2_RV[i] = -0.003;
 						}
-
+						
 						if(enemy2_RV[i] > 0 && Math.abs(enemy2_angle[i] - 3 * Math.PI) < 0.05){
-
+							
 							enemy2_RV[i] = 0.0;
 							enemy2_angle[i] = 3 * Math.PI;
 							shootNow = true;
 						}
-
+						
 						if(enemy2_RV[i] < 0 && Math.abs(enemy2_angle[i]) < 0.05){
-
+							
 							enemy2_RV[i] = 0.0;
 							enemy2_angle[i] = 0.0;
 							shootNow = true;
 						}
-
+																		
 						if(shootNow){
 
 							double [] angles = { Math.PI/2 + Math.PI/8, Math.PI/2, Math.PI/2 - Math.PI/8 };
@@ -490,6 +490,7 @@ public class MainAntigo {
 						nextEnemy2 = currentTime + 120;
 					}
 					else {
+						
 						enemy2_count = 0;
 						enemy2_spawnX = Math.random() > 0.5 ? GameLib.WIDTH * 0.2 : GameLib.WIDTH * 0.8;
 						nextEnemy2 = (long) (currentTime + 3000 + Math.random() * 3000);
@@ -512,16 +513,11 @@ public class MainAntigo {
 			/********************************************/
 			
 			if(player_state == ACTIVE){
-				// Método movimentação
-				if(GameLib.iskeyPressed(GameLib.KEY_UP)
-						&& player_Y > 25) player_Y -= delta * player_VY;
-				if(GameLib.iskeyPressed(GameLib.KEY_DOWN)
-						&& player_Y < GameLib.HEIGHT - 10) player_Y += delta * player_VY;
-				if(GameLib.iskeyPressed(GameLib.KEY_LEFT)
-						&& player_X > 5) player_X -= delta * player_VX;
-				if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)
-						&& player_X < GameLib.WIDTH - 10) player_X += delta * player_VY;
-				//System.out.println(String.format("%.2f, %.2f", player_Y, player_X));
+				
+				if(GameLib.iskeyPressed(GameLib.KEY_UP)) player_Y -= delta * player_VY;
+				if(GameLib.iskeyPressed(GameLib.KEY_DOWN)) player_Y += delta * player_VY;
+				if(GameLib.iskeyPressed(GameLib.KEY_LEFT)) player_X -= delta * player_VX;
+				if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)) player_X += delta * player_VY;
 				if(GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
 					
 					if(currentTime > player_nextShot){
@@ -545,11 +541,11 @@ public class MainAntigo {
 			
 			/* Verificando se coordenadas do player ainda estão dentro	*/
 			/* da tela de jogo após processar entrada do usuário.       */
-
-//			if(player_X < 0.0) player_X = 0.0;
-//			if(player_X >= GameLib.WIDTH) player_X = GameLib.WIDTH - 1;
-//			if(player_Y < 25.0) player_Y = 25.0;
-//			if(player_Y >= GameLib.HEIGHT) player_Y = GameLib.HEIGHT - 1;
+			
+			if(player_X < 0.0) player_X = 0.0;
+			if(player_X >= GameLib.WIDTH) player_X = GameLib.WIDTH - 1;
+			if(player_Y < 25.0) player_Y = 25.0;
+			if(player_Y >= GameLib.HEIGHT) player_Y = GameLib.HEIGHT - 1;
 
 			/*******************/
 			/* Desenho da cena */
@@ -647,7 +643,7 @@ public class MainAntigo {
 				}
 			}
 			
-			/* chamama a display() da classe mainpackage.GameLib atualiza o desenho exibido pela interface do jogo. */
+			/* chamama a display() da classe GameLib atualiza o desenho exibido pela interface do jogo. */
 			
 			GameLib.display();
 			

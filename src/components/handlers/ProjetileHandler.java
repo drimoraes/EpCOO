@@ -1,11 +1,10 @@
 package components.handlers;
 
-import components.Projectile;
-import components.player.Player;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import components.player.Player;
+import components.Projectile;
 
 public class ProjetileHandler {
     protected LinkedList<Projectile> enemyProjectileList;
@@ -26,7 +25,6 @@ public class ProjetileHandler {
 
     public void AdicionarProjectile(ArrayList<Projectile> projectiles){
         this.enemyProjectileList.addAll(projectiles);
-        //System.out.println(this.enemyProjectileList.size());
     }
 
     public void CheckShoots(long delta){

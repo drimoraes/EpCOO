@@ -1,11 +1,11 @@
 package components.enemies;
+
+import java.awt.*;
+import java.util.ArrayList;
 import components.Projectile;
 import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 public class Circle extends Entity implements IEnemy{
     private double angle;
@@ -14,21 +14,18 @@ public class Circle extends Entity implements IEnemy{
     protected static long nextEnemy = System.currentTimeMillis() + 2000;
 
     public Circle(long currentTime){
-        super(States.ACTIVE, Math.random() * (GameLib.WIDTH - 20.0) + 10.0, -10.0,
-                0,0.20 + Math.random() * 0.15,0,0,
-                currentTime + 500, 9);
+        super(States.ACTIVE, Math.random() * (GameLib.WIDTH - 20.0) + 10.0, -10.0, 0,0.20 + Math.random() * 0.15,0,0, currentTime + 500, 9);
         this.angle = 3 * Math.PI / 2;
         this.angleSpeed = 0;
         this.projetileRadius = 2.0;
         Circle.nextEnemy = currentTime + 500;
-        // usar na lista nextEnemy1 = currentTime + 500;
     }
 
     public static long getNextEnemy(){
         return nextEnemy;
     }
 
-    public void Andar(long delta) {
+    public void walk(long delta) {
         walkX(getSpeedX() * Math.cos(this.angle) * delta);
         walkY(getSpeedY() * Math.sin(this.angle) * delta * (-1.0));
         this.angle += this.angleSpeed * delta;
@@ -59,6 +56,7 @@ public class Circle extends Entity implements IEnemy{
     public Boolean getNextShoot(long currentTime){
         return this.next_shot < currentTime;
     }
+
     public void kill(long currenTime){
         this.state = States.EXPLODING;
         this.explosion_start = currenTime;
@@ -67,8 +65,7 @@ public class Circle extends Entity implements IEnemy{
 
     public void draw(double currentTime){
         if(this.state == States.EXPLODING){
-            double alpha = (currentTime - this.explosion_start)
-                    / (this.explosion_end - this.explosion_start);
+            double alpha = (currentTime - this.explosion_start) / (this.explosion_end - this.explosion_start);
             GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
         }
         else{

@@ -10,6 +10,7 @@ public class Projectile {
         this.radius = radius;
         this.position = new Position(posX, posY, speedX, speedY);
     }
+    
     public double getRadius(){
         return this.radius;
     }

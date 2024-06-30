@@ -2,38 +2,36 @@ package components.player;
 
 import components.Projectile;
 import entity.Entity;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 import mainpackage.GameLib;
 import mainpackage.States;
 
-import java.awt.*;
-import java.security.KeyPair;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import components.Projectile;
-
 public class Player extends Entity {
-    private int lives;
-    private int livesTemp;
+    private double lives;
+    private double livesTemp;
     private double flash;
     private double damage;
-    private double projectile_radius;
+    private double shield;
+    private double shieldTemp;
     public static final double defaultSpeed = 0.25;
+    private IGun gun;
     Scanner scanner = new Scanner(System.in);
 
     public Player(double entityPosX, double entityPosY, long next_shot, double radius){
-        super(States.ACTIVE, entityPosX, entityPosY, defaultSpeed, defaultSpeed,
-                0, 0, next_shot, radius);
+        super(States.ACTIVE, entityPosX, entityPosY, defaultSpeed, defaultSpeed, 0, 0, next_shot, radius);
         System.out.println("Digite a quantidade de vidas: ");
         this.lives = scanner.nextInt();
         this.livesTemp = this.lives;
         flash = 0;
         damage = 0;
-        projectile_radius = 2;
+        this.shield = 0;
+        this.shieldTemp = 0;
     }
 
     public double getNextShoot(){
-        return next_shot;
+        return gun.getNextShoot();
     }
 
     public void CheckMoviment(long delta){
@@ -45,22 +43,36 @@ public class Player extends Entity {
             walkX(delta*getSpeedX()*-1);
         if(GameLib.iskeyPressed(GameLib.KEY_RIGHT) && getPosX() < GameLib.WIDTH - 10)
             walkX(delta* getSpeedX());
-        //System.out.print(getPosX());
-        //System.out.print(" ");
-        //System.out.println(getPosY());
     }
 
     public ArrayList<Projectile> Shoot(long currentTime){
-        this.next_shot = currentTime + 100;
-        ArrayList<Projectile> projectiles = new ArrayList<>();
-        Projectile projectile = new Projectile(projectile_radius, getPosX(),
-                getPosY() - 2 * this.radius, 0, -1);
-        projectiles.add(projectile);
-        return projectiles;
+        return gun.shoot(currentTime, getPosX(), getPosY(), getRadius());
+    }
+
+    public Boolean hasGun(){
+        return gun != null;
+    }
+
+    protected void setShield(int shieldValue){
+        this.shield = shieldValue;
+        this.shieldTemp = shieldValue;
+    }
+
+    protected void setGun(IGun gun) {
+        this.gun = gun;
+    }
+
+    protected void removeGun(){
+        this.gun.remove(this);
     }
 
     public void kill(long currentTime){
-        if(this.livesTemp > 1){
+        if(this.shieldTemp > 0){
+            this.shieldTemp--;
+            this.state = States.DAMAGED;
+            this.damage = currentTime + 200;
+        }
+        else if(this.livesTemp > 1){
             this.livesTemp--;
             this.state = States.DAMAGED;
             this.damage = currentTime + 500;
@@ -70,9 +82,11 @@ public class Player extends Entity {
             this.state = States.EXPLODING;
             this.explosion_start = currentTime;
             this.explosion_end = currentTime + 2000;
+            System.out.println("Game Over");
         }
     }
 
+    @Override
     public void draw(double currentTime){
         // Desenha o player
         if(this.getState() == States.EXPLODING){
@@ -88,18 +102,32 @@ public class Player extends Entity {
                 GameLib.setColor(Color.BLUE);
                 flash = currentTime + 20;
             }
+
             GameLib.drawPlayer(this.getPosX(), this.getPosY(), this.getRadius());
         }
         else{
             GameLib.setColor(Color.BLUE);
             GameLib.drawPlayer(this.getPosX(), this.getPosY(), this.getRadius());
+            if(shieldTemp > 0){
+                GameLib.setColor(Color.YELLOW);
+                GameLib.drawCircle(this.getPosX(), this.getPosY(), this.getRadius() + 6);
+            }
         }
+
         // Tamanho da barra
         double barLenght = 200;
         double barHeight = 25;
+
         // Desenha as vidas
         GameLib.setColor(Color.RED);
-        GameLib.fillRect(GameLib.WIDTH*0.5-(barLenght*((double)lives-livesTemp)/(2*lives)), GameLib.HEIGHT-(50+barHeight/2), barLenght*((double)livesTemp/lives), 25);
+        GameLib.fillRect(GameLib.WIDTH*0.5-(barLenght*(lives-livesTemp)/(2*lives)), GameLib.HEIGHT-(50+barHeight/2), barLenght*(livesTemp/lives),25);
+        
+        // Desenha a barra do escudo
+        if(shieldTemp > 0){
+            GameLib.setColor(Color.YELLOW);
+            GameLib.fillRect(GameLib.WIDTH*0.5-(barLenght*(shield-shieldTemp)/(2*shield)), GameLib.HEIGHT-(50+barHeight/2), barLenght*(shieldTemp/shield),25);
+        }
+
         // Desenha a barra de vidas
         GameLib.setColor(Color.WHITE);
         GameLib.drawLine(GameLib.WIDTH*0.5-barLenght/2, GameLib.HEIGHT-50, GameLib.WIDTH*0.5+barLenght/2, GameLib.HEIGHT-50);

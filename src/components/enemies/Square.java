@@ -1,29 +1,26 @@
 package components.enemies;
+
 import components.Projectile;
 import entity.Entity;
+import java.awt.*;
+import java.util.ArrayList;
 import mainpackage.GameLib;
 import mainpackage.States;
 
-import java.awt.*;
-import java.util.ArrayList;
-
 public class Square extends Entity implements IEnemy{
+    private Boolean shootNow = false;
     private double angle;
     private double angleSpeed;
     private double projetileRadius;
-    private Boolean shootNow = false;
-    protected static long nextSquare = System.currentTimeMillis()+ 4000;
     private static double squareCounter = 0;
     private static double path = GameLib.HEIGHT *0.2;
+    protected static long nextSquare = System.currentTimeMillis()+ 4000;
 
     public Square(long currentTime, double spawnX){
-        super(States.ACTIVE, spawnX, -10.0,
-                0,0.42,0,0,
-                currentTime + 500, 12);
+        super(States.ACTIVE, spawnX, -10.0, 0,0.42,0,0, currentTime + 500, 12);
         this.angle = 3 * Math.PI / 2;
         this.angleSpeed = 0;
         this.projetileRadius = 2.0;
-        // usar na lista nextEnemy1 = currentTime + 500;
     }
 
     public static long getNextSquare(){
@@ -44,7 +41,8 @@ public class Square extends Entity implements IEnemy{
     }
 
 
-    public void Andar(long delta) {
+    @Override
+    public void walk(long delta) {
         this.shootNow = false;
         double previousY = getPosY();
         walkX(getSpeedY() * Math.cos(this.angle) * delta);
@@ -69,14 +67,17 @@ public class Square extends Entity implements IEnemy{
         }
     }
 
+    @Override
     public Boolean exploded(long currentTime) {
         return this.state == States.EXPLODING && currentTime > this.explosion_end;
     }
 
+    @Override
     public Boolean leaveScreen(){
         return getPosX() < -10 || getPosX() > GameLib.WIDTH + 10;
     }
 
+    @Override
     public ArrayList<Projectile> Shoot(long currentTime, long delta) {
         double [] angles = { Math.PI/2 + Math.PI/8, Math.PI/2, Math.PI/2 - Math.PI/8 };
 
@@ -93,19 +94,21 @@ public class Square extends Entity implements IEnemy{
         this.next_shot = (long) (currentTime + 200 +Math.random() * 500);
         return projectiles;
     }
+    @Override
     public Boolean getNextShoot(long currentTime){
         return shootNow;
     }
 
+    @Override
     public void kill(long currenTime){
         this.state = States.EXPLODING;
         this.explosion_start = currenTime;
         this.explosion_end = currenTime + 500;
     }
+    @Override
     public void draw(double currentTime){
         if(this.state == States.EXPLODING){
-            double alpha = (currentTime - this.explosion_start)
-                    / (this.explosion_end - this.explosion_start);
+            double alpha = (currentTime - this.explosion_start) / (this.explosion_end - this.explosion_start);
             GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
         }
         else{

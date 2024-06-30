@@ -1,13 +1,12 @@
 package components.handlers;
 
-import components.Background;
+import java.awt.*;
+import components.enemies.IEnemy;
 import components.player.IPowerup;
 import components.player.Player;
+import components.Background;
 import components.Projectile;
-import components.enemies.IEnemy;
 import mainpackage.GameLib;
-
-import java.awt.*;
 
 public class DrawHandler {
     private Background proximo;
@@ -17,8 +16,7 @@ public class DrawHandler {
     private ProjetileHandler projectiles;
     private PowerUpHandler powerUpHandler;
 
-    public DrawHandler(Player player, EnemyHandler enemyHandler,
-                       ProjetileHandler projectiles, PowerUpHandler powerUpHandler) {
+    public DrawHandler(Player player, EnemyHandler enemyHandler, ProjetileHandler projectiles, PowerUpHandler powerUpHandler) {
         this.proximo = new Background(20, 0.07, 0.0);
         this.distante = new Background(50, 0.45, 0.0);
         this.player = player;
