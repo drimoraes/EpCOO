@@ -14,7 +14,7 @@ public class DoubleGun extends Entity implements IPowerup, IGun {
     private Boolean ativo;
 
     public DoubleGun(long currentTime){
-        super(States.ACTIVE, (GameLib.WIDTH/2)*Math.random()+(GameLib.WIDTH/4), ((double)GameLib.HEIGHT/2)*Math.random(), 0, 0, 0, 0, 100, 10);
+        super(States.ACTIVE, GameLib.WIDTH*(Math.random()/2+0.25), GameLib.HEIGHT*(Math.random()/3+0.2), 0, 0, 0, 0, 100, 10);
         projectile_radius = 2;
         this.ativo = false;
         this.end_powerup = Double.MAX_VALUE;
@@ -97,8 +97,9 @@ public class DoubleGun extends Entity implements IPowerup, IGun {
             GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
         }
         else if(this.state != States.INACTIVE){
-            GameLib.setColor(Color.cyan);
+            GameLib.setColor(Color.GREEN);
             GameLib.drawDiamond(this.getPosX(), this.getPosY(), this.getRadius());
+            GameLib.drawDiamond(this.getPosX(), this.getPosY(), this.getRadius() - 4);
         }
     }
 }
