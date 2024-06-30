@@ -101,8 +101,7 @@ public class Square extends Entity implements IEnemy{
     }
     public void draw(double currentTime){
         if(this.state == States.EXPLODING){
-            double alpha = (currentTime - this.explosion_start)
-                    / (this.explosion_end - this.explosion_start);
+            double alpha = (currentTime - this.explosion_start) / (this.explosion_end - this.explosion_start);
             GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
         }
         else{

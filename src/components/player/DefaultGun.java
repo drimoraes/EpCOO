@@ -13,16 +13,13 @@ public class DefaultGun extends Entity implements IPowerup, IGun {
     private Boolean ativo;
 
     public DefaultGun(){
-        super(States.ACTIVE, GameLib.WIDTH / 2, GameLib.HEIGHT / 3,
-                0, 0, 0,
-                0, 100, 10);
+        super(States.ACTIVE, GameLib.WIDTH/2, GameLib.HEIGHT/2, 0, 0, 0, 0, 100, 10);
         projectile_radius = 2;
         this.ativo = true;
         this.end_powerup = Double.MAX_VALUE;
     }
 
-    public ArrayList<Projectile> shoot(long currentTime, double player_x,
-                                   double player_y, double player_radius){
+    public ArrayList<Projectile> shoot(long currentTime, double player_x, double player_y, double player_radius){
         this.next_shot = currentTime + 100;
         ArrayList<Projectile> projectiles = new ArrayList<>();
         Projectile projectile = new Projectile(this.projectile_radius, player_x,
@@ -69,7 +66,6 @@ public class DefaultGun extends Entity implements IPowerup, IGun {
     public void remove(Player player) {
         this.ativo = false;
         this.end_powerup = 0;
-        System.out.println("perdi a arma...");
     }
 
     public void draw(double currentTime) {
@@ -78,8 +74,7 @@ public class DefaultGun extends Entity implements IPowerup, IGun {
                 this.state = States.INACTIVE;
                 return;
             }
-            double alpha = (currentTime - this.explosion_start)
-                    / (this.explosion_end - this.explosion_start);
+            double alpha = (currentTime - this.explosion_start) / (this.explosion_end - this.explosion_start);
             GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
         }
         else if(this.state != States.INACTIVE){

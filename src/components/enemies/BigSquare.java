@@ -83,6 +83,7 @@ public class BigSquare extends Entity implements IEnemy {
         this.next_shot = (long) (currentTime + 200 +Math.random() * 500);
         return projectiles;
     }
+
     public Boolean getNextShoot(long currentTime){
         if(this.getPosY() < this.minimumY) return false;
         return next_shot < currentTime;
@@ -99,15 +100,15 @@ public class BigSquare extends Entity implements IEnemy {
             DeactivateEnemies.Activate(currenTime);
             this.state = States.EXPLODING;
             this.explosion_start = currenTime;
-            nextPreparation = currenTime + 20000;
             this.explosion_end = currenTime + 500;
+            nextPreparation = currenTime + 20000;
             spawned = false;
         }
     }
+
     public void draw(double currentTime){
         if(this.state == States.EXPLODING){
-            double alpha = (currentTime - this.explosion_start)
-                    / (this.explosion_end - this.explosion_start);
+            double alpha = (currentTime - this.explosion_start) / (this.explosion_end - this.explosion_start);
             GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
         }
         else if(this.getState() == States.DAMAGED){

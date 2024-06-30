@@ -5,11 +5,13 @@ import java.util.Iterator;
 import components.player.*;
 
 public class PowerUpHandler {
-    protected ArrayList<IPowerup> powerups = new ArrayList<>();
+    protected ArrayList<IPowerup> powerups;
 
-    public PowerUpHandler() {}
+    public PowerUpHandler(){
+        powerups = new ArrayList<>();
+    }
 
-      public void Update(long currentTime, long delta, Player player){
+    public void Update(long currentTime, long delta, Player player){
         for(Iterator<IPowerup> iterator = powerups.iterator(); iterator.hasNext(); ) {
             IPowerup e = iterator.next();
             if(e.getEndPowerUp() < currentTime && (e.exploded(currentTime) || e.leaveScreen())){

@@ -56,6 +56,7 @@ public class Circle extends Entity implements IEnemy{
     public Boolean getNextShoot(long currentTime){
         return this.next_shot < currentTime;
     }
+
     public void kill(long currenTime){
         this.state = States.EXPLODING;
         this.explosion_start = currenTime;
@@ -64,8 +65,7 @@ public class Circle extends Entity implements IEnemy{
 
     public void draw(double currentTime){
         if(this.state == States.EXPLODING){
-            double alpha = (currentTime - this.explosion_start)
-                    / (this.explosion_end - this.explosion_start);
+            double alpha = (currentTime - this.explosion_start) / (this.explosion_end - this.explosion_start);
             GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
         }
         else{

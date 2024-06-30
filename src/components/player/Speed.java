@@ -76,8 +76,7 @@ public class Speed extends Entity implements IPowerup {
                 this.state = States.INACTIVE;
                 return;
             }
-            double alpha = (currentTime - this.explosion_start)
-                    / (this.explosion_end - this.explosion_start);
+            double alpha = (currentTime - this.explosion_start) / (this.explosion_end - this.explosion_start);
             GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
         }
         else if(this.state != States.INACTIVE){

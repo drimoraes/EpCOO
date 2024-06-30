@@ -17,7 +17,7 @@ public class Main {
 		long currentTime = System.currentTimeMillis();
 
 		/* Inicialização dos objetos responsáveis por controlar a lógica do jogo */
-		Player player = new Player(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.80, currentTime, 12);
+		Player player = new Player(GameLib.WIDTH/2, GameLib.HEIGHT * 0.80, currentTime, 12);
 		PowerUpHandler powerUpHandler = new PowerUpHandler();
 		ProjetileHandler projetileHandler = new ProjetileHandler(player);
 		EnemyHandler enemyHandler = new EnemyHandler(projetileHandler);
