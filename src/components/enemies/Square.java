@@ -1,9 +1,9 @@
 package components.enemies;
 
-import java.awt.*;
-import java.util.ArrayList;
 import components.Projectile;
 import entity.Entity;
+import java.awt.*;
+import java.util.ArrayList;
 import mainpackage.GameLib;
 import mainpackage.States;
 
@@ -41,6 +41,7 @@ public class Square extends Entity implements IEnemy{
     }
 
 
+    @Override
     public void walk(long delta) {
         this.shootNow = false;
         double previousY = getPosY();
@@ -66,14 +67,17 @@ public class Square extends Entity implements IEnemy{
         }
     }
 
+    @Override
     public Boolean exploded(long currentTime) {
         return this.state == States.EXPLODING && currentTime > this.explosion_end;
     }
 
+    @Override
     public Boolean leaveScreen(){
         return getPosX() < -10 || getPosX() > GameLib.WIDTH + 10;
     }
 
+    @Override
     public ArrayList<Projectile> Shoot(long currentTime, long delta) {
         double [] angles = { Math.PI/2 + Math.PI/8, Math.PI/2, Math.PI/2 - Math.PI/8 };
 
@@ -90,15 +94,18 @@ public class Square extends Entity implements IEnemy{
         this.next_shot = (long) (currentTime + 200 +Math.random() * 500);
         return projectiles;
     }
+    @Override
     public Boolean getNextShoot(long currentTime){
         return shootNow;
     }
 
+    @Override
     public void kill(long currenTime){
         this.state = States.EXPLODING;
         this.explosion_start = currenTime;
         this.explosion_end = currenTime + 500;
     }
+    @Override
     public void draw(double currentTime){
         if(this.state == States.EXPLODING){
             double alpha = (currentTime - this.explosion_start) / (this.explosion_end - this.explosion_start);

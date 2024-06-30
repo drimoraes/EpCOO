@@ -1,10 +1,10 @@
 package components.player;
 
+import components.Projectile;
+import entity.Entity;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import components.Projectile;
-import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
 
@@ -86,6 +86,7 @@ public class Player extends Entity {
         }
     }
 
+    @Override
     public void draw(double currentTime){
         // Desenha o player
         if(this.getState() == States.EXPLODING){

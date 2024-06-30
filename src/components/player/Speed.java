@@ -1,12 +1,11 @@
 package components.player;
 
-import java.awt.*;
 import entity.Entity;
+import java.awt.*;
 import mainpackage.GameLib;
 import mainpackage.States;
 
 public class Speed extends Entity implements IPowerup {
-
     private double angleSpeed;
     private double angle;
     private static long nextPowerUp = System.currentTimeMillis() + 6000;
@@ -24,16 +23,19 @@ public class Speed extends Entity implements IPowerup {
         Speed.nextPowerUp = currentTime + 3000;
     }
 
+    @Override
     public void walk(long delta) {
         walkX(getSpeedX() * Math.cos(this.angle) * delta);
         walkY(getSpeedY() * Math.sin(this.angle) * delta * (-1.0));
         this.angle += this.angleSpeed * delta;
     }
 
+    @Override
     public Boolean exploded(long currentTime) {
         return this.state == States.EXPLODING && currentTime > this.explosion_end;
     }
 
+    @Override
     public Boolean leaveScreen(){
         return getPosY() > GameLib.HEIGHT + 10;
     }
@@ -52,6 +54,7 @@ public class Speed extends Entity implements IPowerup {
         return nextPowerUp;
     }
 
+    @Override
     public void apply(long currenTime, Player player){
         this.ativo = true;
         this.end_powerup = currenTime + 4000;
@@ -63,6 +66,7 @@ public class Speed extends Entity implements IPowerup {
         System.out.println("CONSEGUI UM SPEED!!!!!!!!");
     }
 
+    @Override
     public void remove(Player player){
         this.ativo = false;
         player.setSpeedX(Player.defaultSpeed);
@@ -70,6 +74,7 @@ public class Speed extends Entity implements IPowerup {
         System.out.println("perdi o speed...");
     }
 
+    @Override
     public void draw(double currentTime){
         if(this.state == States.EXPLODING){
             if(this.explosion_end < currentTime){

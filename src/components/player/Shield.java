@@ -1,12 +1,11 @@
 package components.player;
 
-import java.awt.*;
 import entity.Entity;
+import java.awt.*;
 import mainpackage.GameLib;
 import mainpackage.States;
 
 public class Shield extends Entity implements IPowerup {
-
     private double angleSpeed;
     private double angle;
     private static long nextPowerUp = System.currentTimeMillis() + 6000;
@@ -27,6 +26,7 @@ public class Shield extends Entity implements IPowerup {
         System.out.println("APARECEU UM SHIELD!!!");
     }
 
+    @Override
     public void walk(long delta) {
         if(getPosX() > GameLib.WIDTH - 40){
             this.direction = -1;
@@ -39,10 +39,12 @@ public class Shield extends Entity implements IPowerup {
         this.angle += this.angleSpeed * delta;
     }
 
+    @Override
     public Boolean exploded(long currentTime) {
         return this.state == States.EXPLODING && currentTime > this.explosion_end;
     }
 
+    @Override
     public Boolean leaveScreen(){
         Boolean leaved = getPosY() > GameLib.HEIGHT + 10;
         if (leaved) Shield.nextPowerUp = System.currentTimeMillis() + 6000;
@@ -63,6 +65,7 @@ public class Shield extends Entity implements IPowerup {
         return nextPowerUp;
     }
 
+    @Override
     public void apply(long currenTime, Player player){
         this.ativo = true;
         this.end_powerup = currenTime + 20000;
@@ -73,6 +76,7 @@ public class Shield extends Entity implements IPowerup {
         System.out.println("CONSEGUI UM SHIELD!!!!!!!!");
     }
 
+    @Override
     public void remove(Player player){
         this.ativo = false;
         player.setShield(0);
@@ -80,6 +84,7 @@ public class Shield extends Entity implements IPowerup {
         System.out.println("perdi o shield...");
     }
 
+    @Override
     public void draw(double currentTime){
         if(this.state == States.EXPLODING){
             if(this.explosion_end < currentTime){
