@@ -36,7 +36,9 @@ public class DefaultGun extends Entity implements IPowerup, IGun {
         return this.next_shot;
     }
 
-    public void Andar(long delta) { }
+    public void Andar(long delta) {
+        
+    }
 
     public Boolean exploded(long currentTime) {
         return true;
@@ -61,15 +63,14 @@ public class DefaultGun extends Entity implements IPowerup, IGun {
         this.explosion_end = currentTime + 100;
         this.walkX(2000);
         this.walkY(2000);
-        System.out.println("CONSEGUI UMA ARMA!!!!!!!!");
         player.setGun(this);
-        System.out.println(player.hasGun());
+        System.out.println("CONSEGUI UMA ARMA!!!!!!!!");
     }
 
     public void remove(Player player) {
         this.ativo = false;
         this.end_powerup = 0;
-        System.out.println("perdi a arma inicial..." + player.getSpeedX());
+        System.out.println("perdi a arma...");
     }
 
     public void draw(double currentTime) {

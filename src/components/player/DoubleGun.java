@@ -74,15 +74,14 @@ public class DoubleGun extends Entity implements IPowerup, IGun {
         nextPowerUp = Long.MAX_VALUE;
         this.walkX(2000);
         this.walkY(2000);
-        System.out.println("CONSEGUI UMA ARMA!!!!!!!!");
         player.setGun(this);
-        System.out.println(player.hasGun());
+        System.out.println("CONSEGUI UMA ARMA!!!!!!!!");
     }
 
     public void remove(Player player) {
         this.ativo = false;
         this.end_powerup = 0;
-        System.out.println("perdi a arma inicial..." + player.getSpeedX());
+        System.out.println("perdi a arma...");
     }
 
     public void draw(double currentTime) {

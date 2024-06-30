@@ -6,9 +6,9 @@ public interface IPowerup {
     void Andar(long delta);
     Boolean exploded(long currentTime);
     Boolean leaveScreen();
+    double getPosX();
     double getPosY();
     double getRadius();
-    double getPosX();
     double getEndPowerUp();
     States getState();
     Boolean isActive();

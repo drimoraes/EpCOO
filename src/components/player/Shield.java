@@ -24,21 +24,15 @@ public class Shield extends Entity implements IPowerup {
         this.end_powerup = 0;
         this.ativo = false;
         Shield.nextPowerUp = Long.MAX_VALUE;
-        System.out.println("NASCE UM SHIELD!!!");
+        System.out.println("APARECEU UM SHIELD!!!");
     }
 
     public void Andar(long delta) {
         if(getPosX() > GameLib.WIDTH - 40){
             this.direction = -1;
-//            System.out.print(getPosX());
-//            System.out.print(" ");
-//            System.out.println(getPosY());
         }
         else if(getPosX() < 60){
             this.direction = 1;
-//            System.out.print(getPosX());
-//            System.out.print(" ");
-//            System.out.println(getPosY());
         }
         walkX(getSpeedX() *Math.cos(this.angle) * delta * this.direction);
         walkY(getSpeedY() * Math.sin(this.angle) * delta * (-1.0));
@@ -76,14 +70,14 @@ public class Shield extends Entity implements IPowerup {
         this.explosion_start = currenTime;
         this.explosion_end = currenTime + 100;
         player.setShield(this.shieldValue);
-        System.out.println("CONSEGUI UM SHIELD!!!!!!!!" + player.getSpeedX());
+        System.out.println("CONSEGUI UM SHIELD!!!!!!!!");
     }
 
     public void remove(Player player){
         this.ativo = false;
         player.setShield(0);
         nextPowerUp = System.currentTimeMillis() + 4000;
-        System.out.println("perdi o powerup..." + player.getSpeedX());
+        System.out.println("perdi o shield...");
     }
 
     public void draw(double currentTime){
@@ -92,8 +86,7 @@ public class Shield extends Entity implements IPowerup {
                 this.state = States.INACTIVE;
                 return;
             }
-            double alpha = (currentTime - this.explosion_start)
-                    / (this.explosion_end - this.explosion_start);
+            double alpha = (currentTime - this.explosion_start) / (this.explosion_end - this.explosion_start);
             GameLib.drawExplosion(this.getPosX(), this.getPosY(), alpha);
         }
         else if(this.state != States.INACTIVE){

@@ -1,37 +1,30 @@
 package components.enemies;
 
-import components.Projectile;
-import entity.Entity;
-import mainpackage.GameLib;
-import mainpackage.States;
 import java.awt.*;
 import java.util.ArrayList;
+import mainpackage.GameLib;
+import mainpackage.States;
+import components.Projectile;
+import entity.Entity;
 
 public class BigSquare extends Entity implements IEnemy {
-    private double angle;
-    private double angleSpeed;
     private double projetileRadius;
-    protected static long nextPreparation = System.currentTimeMillis() + 20000;
-    protected static Boolean spawned = false;
     private double direction = -1;
     private double life;
     private double damage_end;
     private double flash;
     private double minimumY;
+    protected static Boolean spawned = false;
+    protected static long nextPreparation = System.currentTimeMillis() + 20000;
 
     public BigSquare(long currentTime){
-        super(States.ACTIVE, GameLib.WIDTH / 2, -20,
-                0.3,0.5,0,0,
-                currentTime + 500, 40);
-        this.angle = 3 * Math.PI / 2;
-        this.angleSpeed = 0;
-        this.projetileRadius = 4.0;
+        super(States.ACTIVE, GameLib.WIDTH / 2, -20, 0.3,0.5,0,0, currentTime + 500, 40);
         spawned = true;
+        this.projetileRadius = 4.0;
         this.life = 500;
         this.damage_end = 0;
         this.flash = 0;
         minimumY = 90;
-        // usar na lista nextEnemy1 = currentTime + 500;
     }
 
     public static Boolean alreadySpawned(){
@@ -42,7 +35,7 @@ public class BigSquare extends Entity implements IEnemy {
         return nextPreparation;
     }
 
-    public void Andar(long delta) { //
+    public void walk(long delta) { //
         if(getPosY() < this.minimumY){
             walkY(getSpeedY()*delta);
             this.state = States.INACTIVE;
@@ -50,15 +43,9 @@ public class BigSquare extends Entity implements IEnemy {
         }
         if(getPosX() > GameLib.WIDTH - 40){
             this.direction = -1;
-            System.out.print(getPosX());
-            System.out.print(" ");
-            System.out.println(getPosY());
         }
         else if(getPosX() < 60){
             this.direction = 1;
-            System.out.print(getPosX());
-            System.out.print(" ");
-            System.out.println(getPosY());
         }
         walkX(getSpeedX() * delta * this.direction);
     }

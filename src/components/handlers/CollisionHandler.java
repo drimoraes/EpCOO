@@ -73,8 +73,7 @@ public class CollisionHandler {
            double dy = powerup.getPosY() - this.player.getPosY();
            double dist = Math.sqrt(dx * dx + dy * dy);
 
-           if(dist < (player.getRadius() + powerup.getRadius()) * 0.8
-                   && powerup.getState() == States.ACTIVE){
+           if(dist<(player.getRadius() + powerup.getRadius())*0.8 && powerup.getState()==States.ACTIVE){
                powerup.apply(currentTime, this.player);
            }
         }

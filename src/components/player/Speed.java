@@ -60,14 +60,14 @@ public class Speed extends Entity implements IPowerup {
         this.explosion_end = currenTime + 100;
         player.setSpeedX(Player.defaultSpeed * 1.3);
         player.setSpeedY(Player.defaultSpeed * 1.3);
-        System.out.println("CONSEGUI UM POWERUP!!!!!!!!" + player.getSpeedX());
+        System.out.println("CONSEGUI UM SPEED!!!!!!!!");
     }
 
     public void remove(Player player){
         this.ativo = false;
         player.setSpeedX(Player.defaultSpeed);
         player.setSpeedY(Player.defaultSpeed);
-        System.out.println("perdi o powerup..." + player.getSpeedX());
+        System.out.println("perdi o speed...");
     }
 
     public void draw(double currentTime){

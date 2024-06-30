@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player extends Entity {
-    private int lives;
-    private int livesTemp;
+    private double lives;
+    private double livesTemp;
     private double flash;
     private double damage;
     private double shield;
@@ -20,8 +20,7 @@ public class Player extends Entity {
     Scanner scanner = new Scanner(System.in);
 
     public Player(double entityPosX, double entityPosY, long next_shot, double radius){
-        super(States.ACTIVE, entityPosX, entityPosY, defaultSpeed, defaultSpeed,
-                0, 0, next_shot, radius);
+        super(States.ACTIVE, entityPosX, entityPosY, defaultSpeed, defaultSpeed, 0, 0, next_shot, radius);
         System.out.println("Digite a quantidade de vidas: ");
         this.lives = scanner.nextInt();
         this.livesTemp = this.lives;
@@ -44,9 +43,6 @@ public class Player extends Entity {
             walkX(delta*getSpeedX()*-1);
         if(GameLib.iskeyPressed(GameLib.KEY_RIGHT) && getPosX() < GameLib.WIDTH - 10)
             walkX(delta* getSpeedX());
-        //System.out.print(getPosX());
-        //System.out.print(" ");
-        //System.out.println(getPosY());
     }
 
     public ArrayList<Projectile> Shoot(long currentTime){
@@ -108,27 +104,28 @@ public class Player extends Entity {
             GameLib.drawPlayer(this.getPosX(), this.getPosY(), this.getRadius());
         }
         else{
-            if(shieldTemp > 0){
-                GameLib.setColor(Color.YELLOW);
-                GameLib.drawCircle(this.getPosX(), this.getPosY(), this.getRadius() + 3);
-            }
             GameLib.setColor(Color.BLUE);
             GameLib.drawPlayer(this.getPosX(), this.getPosY(), this.getRadius());
+            if(shieldTemp > 0){
+                GameLib.setColor(Color.YELLOW);
+                GameLib.drawCircle(this.getPosX(), this.getPosY(), this.getRadius() + 6);
+            }
         }
+
         // Tamanho da barra
         double barLenght = 200;
         double barHeight = 25;
+
         // Desenha as vidas
+        GameLib.setColor(Color.RED);
+        GameLib.fillRect(GameLib.WIDTH*0.5-(barLenght*(lives-livesTemp)/(2*lives)), GameLib.HEIGHT-(50+barHeight/2), barLenght*(livesTemp/lives),25);
+        
+        // Desenha a barra do escudo
         if(shieldTemp > 0){
             GameLib.setColor(Color.YELLOW);
-            GameLib.fillRect(GameLib.WIDTH*0.5-(barLenght*((double)shield-shieldTemp)/(2*shield)),
-                    GameLib.HEIGHT-(50+barHeight/2), barLenght*((double)shieldTemp/shield),
-                    25);
+            GameLib.fillRect(GameLib.WIDTH*0.5-(barLenght*(shield-shieldTemp)/(2*shield)), GameLib.HEIGHT-(50+barHeight/2), barLenght*(shieldTemp/shield),25);
         }
-        else{
-            GameLib.setColor(Color.RED);
-            GameLib.fillRect(GameLib.WIDTH*0.5-(barLenght*((double)lives-livesTemp)/(2*lives)), GameLib.HEIGHT-(50+barHeight/2), barLenght*((double)livesTemp/lives), 25);
-        }
+
         // Desenha a barra de vidas
         GameLib.setColor(Color.WHITE);
         GameLib.drawLine(GameLib.WIDTH*0.5-barLenght/2, GameLib.HEIGHT-50, GameLib.WIDTH*0.5+barLenght/2, GameLib.HEIGHT-50);

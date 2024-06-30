@@ -1,10 +1,10 @@
 package components.handlers;
 
 import components.Background;
-import components.player.IPowerup;
-import components.player.Player;
 import components.Projectile;
 import components.enemies.IEnemy;
+import components.player.IPowerup;
+import components.player.Player;
 import mainpackage.GameLib;
 
 import java.awt.*;

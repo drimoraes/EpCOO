@@ -1,8 +1,8 @@
 package components.handlers;
 
-import components.enemies.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import components.enemies.*;
 
 public class EnemyHandler {
     protected ArrayList<IEnemy> enemies = new ArrayList<>();
@@ -19,7 +19,7 @@ public class EnemyHandler {
                 iterator.remove();
             }
             else{
-                e.Andar(delta);
+                e.walk(delta);
                 if (e.getNextShoot(currentTime) && e.getPosY() < playerYPosition)
                     this.projetileHandler.AdicionarProjectile(e.Shoot(currentTime, delta));
             }

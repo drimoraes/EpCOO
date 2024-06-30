@@ -1,8 +1,8 @@
 package components.handlers;
 
-import components.player.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import components.player.*;
 
 public class PowerUpHandler {
     protected ArrayList<IPowerup> powerups = new ArrayList<>();
