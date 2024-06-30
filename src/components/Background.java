@@ -1,9 +1,8 @@
 package components;
 
-import mainpackage.GameLib;
-
 import java.awt.*;
 import java.util.ArrayList;
+import mainpackage.GameLib;
 
 public class Background {
     private ArrayList<Double> X;

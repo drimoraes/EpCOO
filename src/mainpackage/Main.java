@@ -5,85 +5,71 @@ import components.player.Player;
 
 public class Main {
 	public static void busyWait(long time){
-
 		while(System.currentTimeMillis() < time) Thread.yield();
 	}
-	public static void main(String [] args){
 
+	public static void main(String [] args){
 		/* Indica que o jogo está em execução */
 		boolean running = true;
-		/* variáveis usadas no controle de tempo efetuado no main loop */
+
+		/* Variáveis usadas no controle de tempo efetuado no main loop */
 		long delta;
 		long currentTime = System.currentTimeMillis();
 
-		Player player = new Player(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.80,
-				currentTime, 12);
-
-
+		/* Inicialização dos objetos responsáveis por controlar a lógica do jogo */
+		Player player = new Player(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.80, currentTime, 12);
+		PowerUpHandler powerUpHandler = new PowerUpHandler();
 		ProjetileHandler projetileHandler = new ProjetileHandler(player);
 		EnemyHandler enemyHandler = new EnemyHandler(projetileHandler);
-		PowerUpHandler powerUpHandler = new PowerUpHandler();
-		CollisionHandler collisionHandler = new CollisionHandler(player, enemyHandler,
-				projetileHandler, powerUpHandler);
-
+		CollisionHandler collisionHandler = new CollisionHandler(player, enemyHandler, projetileHandler, powerUpHandler);
 		DrawHandler drawHandler = new DrawHandler(player, enemyHandler, projetileHandler, powerUpHandler);
 
+		/* Inicialização da janela do jogo */
 		GameLib.initGraphics();
 
+		/* Início do jogo, começa apenas quando pega a primeira arma */
 		powerUpHandler.addStartGame();
 		while(!player.hasGun()){
+			/* Atualização dos tempos */
 			delta = System.currentTimeMillis() - currentTime;
 			currentTime = System.currentTimeMillis();
-
-			player.CheckMoviment(delta);
-			drawHandler.drawEntities(currentTime);
-			collisionHandler.checarColisoes(currentTime, player.getState());
+			
+			/* Verificação e atualização do jogo*/
+			collisionHandler.checkCollision(currentTime, player.getState());
 			powerUpHandler.Update(currentTime, delta, player);
+			player.CheckMoviment(delta);
 
+			/* Desenho da cena parada no tempo */
+			drawHandler.continueBackground(0);
+			drawHandler.drawEntities(currentTime);
+
+			/* Atualização do display e pausa do jogo */
 			GameLib.display();
 			busyWait(currentTime + 5);
 		}
 
-		//DeactivateEnemies.Deactivate();
-
+		/* Começa o jogo em si, começando com a primeira arma */
 		while(running){
 		
-			/* Usada para atualizar o estado dos elementos do jogo    */
-			/* (player, projéteis e inimigos) "delta" indica quantos  */
-			/* ms se passaram desde a última atualização.             */
-			
+			/* Atualização do delta (variação do tempo desde a última atualização) */
 			delta = System.currentTimeMillis() - currentTime;
 			
-			/* Já a variável "currentTime" nos dá o timestamp atual.  */
-			
+			/* Atualização do timestamp atual. */
 			currentTime = System.currentTimeMillis();
 
-			/***************************/
 			/* Verificação de colisões */
-			/***************************/
+			collisionHandler.checkCollision(currentTime, player.getState());
 
-			collisionHandler.checarColisoes(currentTime, player.getState());
-
-			/***************************/
 			/* Atualizações de estados */
-			/***************************/
-
 			projetileHandler.CheckShoots(delta);
-
 			enemyHandler.Update(currentTime, delta, player.getPosY());
 			powerUpHandler.Update(currentTime, delta, player);
-			//projetileHandler.DispararInimigos(currentTime, delta);
-
 			enemyHandler.Add(currentTime);
 			powerUpHandler.Add(currentTime);
 			player.checkRevive(currentTime);
 
-			/********************************************/
 			/* Verificando entrada do usuário (teclado) */
-			/********************************************/
-
 			if(player.getState() == States.ACTIVE || player.getState() == States.DAMAGED){
-				// Método movimentação
 				player.CheckMoviment(delta);
 				if(GameLib.iskeyPressed(GameLib.KEY_CONTROL) && player.getState() == States.ACTIVE){
 					projetileHandler.DispararPlayer(currentTime);
@@ -91,20 +77,14 @@ public class Main {
 			}
 			if(GameLib.iskeyPressed(GameLib.KEY_ESCAPE)) running = false;
 
-			/*******************/
 			/* Desenho da cena */
-			/*******************/
-
 			drawHandler.continueBackground(delta);
-
 			drawHandler.drawEntities(currentTime);
 			
-			/* chamama a display() da classe mainpackage.GameLib atualiza o desenho exibido pela interface do jogo. */
-			
+			/* Atualização do desenho exibido pela interface do jogo */
 			GameLib.display();
 			
-			/* faz uma pausa de modo que cada execução do laço do main loop demore aproximadamente 5 ms. */
-
+			/* Pausa de modo que cada execução do laço do main loop demore aproximadamente 5 ms */
 			busyWait(currentTime + 5);
 		}
 		

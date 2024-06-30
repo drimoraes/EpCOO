@@ -1,7 +1,7 @@
 package components.enemies;
 
-import components.Projectile;
 import java.util.ArrayList;
+import components.Projectile;
 
 public interface IEnemy {
     void walk(long delta);

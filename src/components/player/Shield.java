@@ -1,9 +1,9 @@
 package components.player;
+
+import java.awt.*;
 import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
-
-import java.awt.*;
 
 public class Shield extends Entity implements IPowerup {
 
@@ -27,7 +27,7 @@ public class Shield extends Entity implements IPowerup {
         System.out.println("APARECEU UM SHIELD!!!");
     }
 
-    public void Andar(long delta) {
+    public void walk(long delta) {
         if(getPosX() > GameLib.WIDTH - 40){
             this.direction = -1;
         }

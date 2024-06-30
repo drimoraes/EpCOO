@@ -1,12 +1,11 @@
 package components.player;
 
+import java.awt.*;
+import java.util.ArrayList;
 import components.Projectile;
 import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 public class DefaultGun extends Entity implements IPowerup, IGun {
     private double projectile_radius;
@@ -36,7 +35,7 @@ public class DefaultGun extends Entity implements IPowerup, IGun {
         return this.next_shot;
     }
 
-    public void Andar(long delta) {
+    public void walk(long delta) {
         
     }
 

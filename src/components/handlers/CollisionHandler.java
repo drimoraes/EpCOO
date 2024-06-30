@@ -1,9 +1,9 @@
 package components.handlers;
 
-import components.Projectile;
 import components.enemies.IEnemy;
 import components.player.IPowerup;
 import components.player.Player;
+import components.Projectile;
 import mainpackage.States;
 
 public class CollisionHandler {
@@ -20,7 +20,7 @@ public class CollisionHandler {
         this.powerUpHandler = powerUpHandler;
     }
 
-    public void checarColisoes(long currentTime, States playerState){
+    public void checkCollision(long currentTime, States playerState){
         if(playerState == States.ACTIVE){
             enemyProjectilePlayer(currentTime);
             playerEnemy(currentTime);

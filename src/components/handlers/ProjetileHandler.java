@@ -3,8 +3,8 @@ package components.handlers;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import components.Projectile;
 import components.player.Player;
+import components.Projectile;
 
 public class ProjetileHandler {
     protected LinkedList<Projectile> enemyProjectileList;

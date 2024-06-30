@@ -2,10 +2,10 @@ package components.enemies;
 
 import java.awt.*;
 import java.util.ArrayList;
-import mainpackage.GameLib;
-import mainpackage.States;
 import components.Projectile;
 import entity.Entity;
+import mainpackage.GameLib;
+import mainpackage.States;
 
 public class BigSquare extends Entity implements IEnemy {
     private double projetileRadius;

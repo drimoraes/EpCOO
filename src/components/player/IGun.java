@@ -1,7 +1,7 @@
 package components.player;
 
-import components.Projectile;
 import java.util.ArrayList;
+import components.Projectile;
 
 interface IGun {
     ArrayList<Projectile> shoot(long currentTime, double player_x, double player_y, double player_radius);

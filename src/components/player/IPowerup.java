@@ -3,7 +3,7 @@ package components.player;
 import mainpackage.States;
 
 public interface IPowerup {
-    void Andar(long delta);
+    void walk(long delta);
     Boolean exploded(long currentTime);
     Boolean leaveScreen();
     double getPosX();

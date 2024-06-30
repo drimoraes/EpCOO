@@ -1,9 +1,9 @@
 package components.player;
+
+import java.awt.*;
 import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
-
-import java.awt.*;
 
 public class Speed extends Entity implements IPowerup {
 
@@ -24,7 +24,7 @@ public class Speed extends Entity implements IPowerup {
         Speed.nextPowerUp = currentTime + 3000;
     }
 
-    public void Andar(long delta) {
+    public void walk(long delta) {
         walkX(getSpeedX() * Math.cos(this.angle) * delta);
         walkY(getSpeedY() * Math.sin(this.angle) * delta * (-1.0));
         this.angle += this.angleSpeed * delta;

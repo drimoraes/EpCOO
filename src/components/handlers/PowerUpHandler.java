@@ -18,7 +18,7 @@ public class PowerUpHandler {
                 iterator.remove();
             }
             else{
-                e.Andar(delta);
+                e.walk(delta);
             }
         }
     }

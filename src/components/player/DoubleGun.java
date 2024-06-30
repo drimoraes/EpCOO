@@ -1,12 +1,11 @@
 package components.player;
 
+import java.awt.*;
+import java.util.ArrayList;
 import components.Projectile;
 import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 public class DoubleGun extends Entity implements IPowerup, IGun {
     private double projectile_radius;
@@ -47,7 +46,9 @@ public class DoubleGun extends Entity implements IPowerup, IGun {
         return this.next_shot;
     }
 
-    public void Andar(long delta) { }
+    public void walk(long delta) {
+
+    }
 
     public Boolean exploded(long currentTime) {
         return this.state == States.EXPLODING && currentTime > this.explosion_end;

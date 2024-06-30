@@ -1,12 +1,12 @@
 package components.player;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 import components.Projectile;
 import entity.Entity;
 import mainpackage.GameLib;
 import mainpackage.States;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Player extends Entity {
     private double lives;
