@@ -82,7 +82,7 @@ public class Player extends Entity {
             this.state = States.EXPLODING;
             this.explosion_start = currentTime;
             this.explosion_end = currentTime + 2000;
-            System.out.println("Explodindo!");
+            System.out.println("Game Over");
         }
     }
 

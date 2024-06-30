@@ -12,8 +12,7 @@ public class CollisionHandler {
     private ProjetileHandler projetileHandler;
     private PowerUpHandler powerUpHandler;
 
-    public CollisionHandler(Player player, EnemyHandler enemyHandler,
-                            ProjetileHandler projectileHandler, PowerUpHandler powerUpHandler) {
+    public CollisionHandler(Player player, EnemyHandler enemyHandler, ProjetileHandler projectileHandler, PowerUpHandler powerUpHandler) {
         this.player = player;
         this.enemyHandler = enemyHandler;
         this.projetileHandler = projectileHandler;
